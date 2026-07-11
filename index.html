@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elmer.H — Indie Developer</title>
+<meta name="description" content="Elmer.H — indie developer building tools for musicians. Home of GuitarMetro, the LED metronome.">
+<meta property="og:title" content="Elmer.H — Indie Developer">
+<meta property="og:description" content="Tools for musicians. Home of GuitarMetro.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  /* ---- 涂鸦贴纸风：天蓝底 · 白描边贴纸 · 粉紫撞色（取自 Logo）---- */
+  :root {
+    --sky: #6dc4dc;        /* Logo 底色 */
+    --sky-deep: #579caf;   /* Logo 底部深带 */
+    --ink: #253444;        /* 深墨文字 */
+    --ink-soft: #47607355;
+    --paper: #ffffff;
+    --pink: #e14fb2;
+    --purple: #8a63e8;
+    --violet: #b44fd8;
+    --orange: #f0993f;
+    --mint: #43cfa4;
+    --sticker-border: 5px solid #ffffff;
+    --sticker-shadow: 0 10px 0 rgba(37, 52, 68, 0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--sky);
+    color: var(--ink);
+    font-family: "Baloo 2", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .zh-t { display: none; }
+  body.zh .zh-t { display: inline; }
+  body.zh .en-t { display: none; }
+
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- 顶栏：白贴纸横条 ---- */
+  header { position: sticky; top: 12px; z-index: 10; padding: 0 16px; }
+  .nav {
+    max-width: 1020px; margin: 0 auto;
+    display: flex; align-items: center; gap: 22px;
+    background: var(--paper);
+    border-radius: 999px; padding: 10px 22px;
+    box-shadow: 0 6px 0 rgba(37, 52, 68, 0.15);
+  }
+  .brand {
+    font-weight: 800; font-size: 19px; letter-spacing: 0.5px;
+    color: var(--ink); text-decoration: none;
+  }
+  .brand .dot { color: var(--pink); }
+  .nav a.link { color: #55707f; text-decoration: none; font-size: 14.5px; font-weight: 700; }
+  .nav a.link:hover { color: var(--pink); }
+  .nav .spacer { flex: 1; }
+  .lang-btn {
+    background: var(--ink); color: #fff;
+    border: none; border-radius: 999px;
+    padding: 6px 16px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit;
+  }
+  .lang-btn:hover { background: var(--pink); }
+
+  /* ---- Hero ---- */
+  .hero { padding: 54px 0 26px; text-align: center; position: relative; }
+  /* Logo 为不透明 PNG（底色与页面同色）：裁掉底部地面带、不加投影，
+     矩形边界即隐形，只剩贴纸字形浮在页面上 */
+  .hero-logo-box {
+    width: 250px; max-width: 60vw; margin: 0 auto;
+    aspect-ratio: 1 / 0.84; overflow: hidden;
+    transform: rotate(-2deg);
+    transition: transform 0.25s ease;
+  }
+  .hero-logo-box:hover { transform: rotate(2deg) scale(1.04); }
+  .hero-logo-box img { width: 100%; display: block; }
+  h1 {
+    margin-top: 6px; font-size: 52px; font-weight: 800;
+    color: #fff; letter-spacing: 1px;
+    text-shadow: 3px 3px 0 rgba(37, 52, 68, 0.25);
+  }
+  h1 .dot { color: var(--pink); text-shadow: 3px 3px 0 rgba(37,52,68,.25); }
+  .tagline {
+    margin-top: 4px; font-family: "Patrick Hand", "Baloo 2", cursive;
+    color: #23495a; font-size: 21px;
+  }
+  .hero-note { margin-top: 10px; color: #2f596c; font-size: 14px; opacity: 0.75; }
+
+  /* ---- 区块标题：手写贴纸标签 ---- */
+  section { padding: 42px 0; }
+  .sec-title {
+    display: inline-block;
+    font-family: "Patrick Hand", cursive; font-size: 24px;
+    background: var(--ink); color: #fff;
+    padding: 4px 20px; border-radius: 999px;
+    transform: rotate(-1.5deg);
+    box-shadow: 4px 4px 0 rgba(37, 52, 68, 0.2);
+    margin-bottom: 26px;
+  }
+
+  /* ---- 应用贴纸大卡 ---- */
+  .app-card {
+    background: var(--paper);
+    border-radius: 26px;
+    padding: 34px;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px;
+    box-shadow: var(--sticker-shadow);
+    position: relative;
+  }
+  .app-card::before {
+    /* 胶带 */
+    content: ""; position: absolute; top: -14px; left: 50%;
+    width: 120px; height: 28px; transform: translateX(-50%) rotate(-3deg);
+    background: rgba(240, 153, 63, 0.55); border-radius: 4px;
+  }
+  .app-head { display: flex; align-items: center; gap: 16px; }
+  .app-head img {
+    width: 68px; height: 68px; border-radius: 18px;
+    border: 4px solid #fff;
+    box-shadow: 0 6px 0 rgba(37, 52, 68, 0.18);
+    transform: rotate(-3deg);
+  }
+  .app-head h2 { font-size: 28px; font-weight: 800; color: var(--ink); }
+  .app-head .sub { color: #6b8291; font-size: 14px; margin-top: -2px; font-weight: 600; }
+  .app-desc { margin-top: 16px; color: #3d5566; font-size: 15px; }
+  ul.feat { margin: 14px 0 0 0; list-style: none; }
+  ul.feat li {
+    padding-left: 26px; position: relative; margin-bottom: 7px;
+    color: #4a6272; font-size: 14px; font-weight: 600;
+  }
+  ul.feat li::before {
+    content: "★"; position: absolute; left: 2px; top: 0;
+    font-size: 13px;
+  }
+  ul.feat li:nth-child(1)::before { color: var(--pink); }
+  ul.feat li:nth-child(2)::before { color: var(--purple); }
+  ul.feat li:nth-child(3)::before { color: var(--orange); }
+  ul.feat li:nth-child(4)::before { color: var(--mint); }
+  ul.feat li:nth-child(5)::before { color: var(--violet); }
+
+  .dl-title {
+    margin-top: 22px; font-family: "Patrick Hand", cursive;
+    font-size: 18px; color: #6b8291;
+  }
+  .dl-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    color: #fff; text-decoration: none;
+    font-size: 13.5px; font-weight: 800; font-family: inherit;
+    border: 3px solid #fff; border-radius: 999px;
+    padding: 8px 16px;
+    box-shadow: 0 5px 0 rgba(37, 52, 68, 0.2);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 8px 0 rgba(37,52,68,.22); }
+  .btn.win { background: var(--purple); }
+  .btn.mac { background: var(--ink); }
+  .btn.ios { background: var(--pink); }
+  .btn.and { background: var(--mint); }
+  .btn small { font-weight: 600; opacity: 0.8; }
+  .btn.soon { background: #b9cdd6; box-shadow: none; pointer-events: none; border-color: #e8f1f5; }
+  .dl-note { margin-top: 12px; font-size: 12.5px; color: #7d93a1; }
+
+  /* ---- 截图：歪贴的拍立得 ---- */
+  .shots { display: flex; gap: 16px; align-items: flex-start; justify-content: center; }
+  .shot {
+    border: var(--sticker-border); border-radius: 16px; overflow: hidden;
+    box-shadow: var(--sticker-shadow);
+    background: #1b1f25;
+  }
+  .shot.main { width: 60%; transform: rotate(1.6deg); }
+  .shot-col { width: 40%; display: flex; flex-direction: column; gap: 18px; }
+  .shot-col .shot:first-child { transform: rotate(-2deg); }
+  .shot-col .shot:last-child { transform: rotate(2.4deg); }
+  .shot img { width: 100%; display: block; margin-top: -4.3%; }
+  .shot.wide img { margin-top: 0; }
+
+  /* ---- 未来应用占位贴纸 ---- */
+  .coming {
+    margin-top: 30px;
+    border: 4px dashed rgba(255, 255, 255, 0.85); border-radius: 22px;
+    padding: 24px 32px; color: #23495a; font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; gap: 14px;
+    transform: rotate(-0.6deg);
+  }
+  .coming .doodle { font-size: 22px; }
+
+  /* ---- 关于贴纸 ---- */
+  .about-card {
+    background: var(--paper); border-radius: 24px;
+    padding: 30px 34px; color: #3d5566; font-size: 15px;
+    box-shadow: var(--sticker-shadow);
+    transform: rotate(0.5deg);
+    position: relative;
+  }
+  .about-card::before {
+    content: ""; position: absolute; top: -12px; right: 40px;
+    width: 90px; height: 24px; transform: rotate(4deg);
+    background: rgba(138, 99, 232, 0.4); border-radius: 4px;
+  }
+  .about-card b { color: var(--ink); }
+
+  /* ---- 页脚：深蓝地面带 ---- */
+  footer {
+    margin-top: 40px;
+    background: var(--sky-deep);
+    padding: 30px 0 40px;
+    color: #eaf6fa; font-size: 13.5px; font-weight: 600;
+  }
+  .foot { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .foot a { color: #fff; text-decoration: none; border-bottom: 2px solid rgba(255,255,255,0.35); }
+  .foot a:hover { border-color: var(--pink); color: #ffd7ef; }
+  .foot .spacer { flex: 1; }
+
+  @media (max-width: 820px) {
+    .app-card { grid-template-columns: 1fr; }
+    h1 { font-size: 38px; }
+    .hero-logo { width: 210px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#">Elmer<span class="dot">.</span>H</a>
+    <a class="link" href="#apps"><span class="en-t">Apps</span><span class="zh-t">应用</span></a>
+    <a class="link" href="#about"><span class="en-t">About</span><span class="zh-t">关于</span></a>
+    <a class="link" href="privacy.html"><span class="en-t">Privacy</span><span class="zh-t">隐私</span></a>
+    <span class="spacer"></span>
+    <button class="lang-btn" onclick="toggleLang()"><span class="en-t">中文</span><span class="zh-t">EN</span></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-logo-box"><img src="assets/logo.png" alt="Elmer.H logo"></div>
+    <h1>Elmer<span class="dot">.</span>H</h1>
+    <p class="tagline">
+      <span class="en-t">Indie developer · building tools for musicians</span>
+      <span class="zh-t">独立开发者 · 为音乐人做趁手的工具</span>
+    </p>
+    <p class="hero-note">
+      <span class="en-t">One app at a time. Crafted, not shipped.</span>
+      <span class="zh-t">一次打磨一件作品。</span>
+    </p>
+  </div>
+</div>
+
+<section id="apps">
+  <div class="wrap">
+    <div class="sec-title"><span class="en-t">Apps ↓</span><span class="zh-t">应用 ↓</span></div>
+
+    <div class="app-card">
+      <div>
+        <div class="app-head">
+          <img src="assets/guitarmetro-icon.png" alt="GuitarMetro icon">
+          <div>
+            <h2>GuitarMetro</h2>
+            <div class="sub">
+              <span class="en-t">The LED metronome for serious practice</span>
+              <span class="zh-t">认真练琴用的 LED 节拍器</span>
+            </div>
+          </div>
+        </div>
+        <p class="app-desc">
+          <span class="en-t">Sample-accurate timing driven by your sound card's clock —
+            no software-timer jitter, ever. Wrapped in a neon LED interface
+            with a real fragment-shader glow.</span>
+          <span class="zh-t">由声卡时钟驱动的采样级节拍精度——彻底告别软件定时器的抖动。
+            外加真 fragment shader 渲染的霓虹 LED 界面。</span>
+        </p>
+        <ul class="feat">
+          <li><span class="en-t">Tempo trainer: auto-ramping speed with progress ring</span><span class="zh-t">变速训练：自动分档爬升 + 进度环</span></li>
+          <li><span class="en-t">Built-in tuner: guitar / bass / ukulele, 17 tunings</span><span class="zh-t">内置调弦：吉他/贝斯/尤克里里，17 种调弦</span></li>
+          <li><span class="en-t">Practice timer with yearly stats &amp; streaks</span><span class="zh-t">练琴计时：年度曲线与连续打卡</span></li>
+          <li><span class="en-t">3 independent voices, 15 meters, 8 subdivisions</span><span class="zh-t">三声部独立音色，15 种拍号、8 种细分</span></li>
+          <li><span class="en-t">12 languages · Windows / macOS / iOS / Android</span><span class="zh-t">12 语言 · Windows / macOS / iOS / Android 全平台</span></li>
+        </ul>
+
+        <div class="dl-title"><span class="en-t">Download · v0.5.0</span><span class="zh-t">下载 · v0.5.0</span></div>
+        <div class="dl-row">
+          <a class="btn win" href="https://github.com/Houmj0313/Houmj0313.github.io/releases/download/guitarmetro-v0.5.0/GuitarMetro-win64.zip">
+            🪟 Windows <small>zip</small></a>
+          <a class="btn mac" href="https://github.com/Houmj0313/Houmj0313.github.io/releases/download/guitarmetro-v0.5.0/GuitarMetro-macOS.zip">
+            🍎 macOS <small>zip</small></a>
+          <a class="btn ios" href="https://testflight.apple.com/join/YmKxWtsj">
+            📱 iOS <small>TestFlight</small></a>
+          <a class="btn and" href="https://github.com/Houmj0313/Houmj0313.github.io/releases/download/guitarmetro-v0.5.0/GuitarMetro-android.apk">
+            🤖 Android <small>apk</small></a>
+        </div>
+        <div class="dl-row">
+          <a class="btn soon" href="#"><span class="en-t">Microsoft Store — soon</span><span class="zh-t">微软商店 · 即将上架</span></a>
+          <a class="btn soon" href="#"><span class="en-t">App Store — soon</span><span class="zh-t">App Store · 即将上架</span></a>
+        </div>
+        <p class="dl-note">
+          <span class="en-t">macOS build is notarized by Apple. Android APK is a sideload build.</span>
+          <span class="zh-t">macOS 包已通过 Apple 公证；Android 为侧载 APK。</span>
+        </p>
+      </div>
+
+      <div class="shots">
+        <div class="shot main"><img src="assets/shot-dial.png" alt="GuitarMetro dial"></div>
+        <div class="shot-col">
+          <div class="shot wide"><img src="assets/shot-mini.png" alt="Mini floating window"></div>
+          <div class="shot"><img src="assets/shot-tuner.png" alt="Tuner"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="coming">
+      <span class="doodle">✏️</span>
+      <span class="en-t">More tools are on the workbench — stay tuned.</span>
+      <span class="zh-t">更多工具正在工作台上打磨——敬请期待。</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-title"><span class="en-t">About</span><span class="zh-t">关于</span></div>
+    <div class="about-card">
+      <p>
+        <span class="en-t"><b>Elmer.H</b> is a one-person studio. I play guitar, I got annoyed by
+          wobbly metronomes, so I built one that ticks like hardware. Everything here is
+          crafted end-to-end by me — design, code, sound synthesis and the pixels in between.</span>
+        <span class="zh-t"><b>Elmer.H</b> 是一个人的工作室。我弹吉他，受够了会"漂"的节拍器，
+          于是做了一个像硬件一样稳的。这里的每件作品都由我一人从头打磨——设计、代码、
+          声音合成，以及中间的每一个像素。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Elmer.H</span>
+    <a href="https://github.com/Houmj0313">GitHub</a>
+    <a href="mailto:elmerhou@163.com">Email</a>
+    <span class="spacer"></span>
+    <a href="privacy.html"><span class="en-t">Privacy Policy</span><span class="zh-t">隐私政策</span></a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var saved = localStorage.getItem('lang');
+    var zh = saved ? saved === 'zh' : (navigator.language || '').toLowerCase().startsWith('zh');
+    if (zh) document.body.classList.add('zh');
+  })();
+  function toggleLang() {
+    document.body.classList.toggle('zh');
+    localStorage.setItem('lang', document.body.classList.contains('zh') ? 'zh' : 'en');
+  }
+</script>
+</body>
+</html>
