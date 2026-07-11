@@ -236,11 +236,62 @@
     padding: 20px 26px; color: var(--muted); font-size: 14px;
     display: flex; align-items: center; gap: 14px;
   }
-  .coming .cursor {
+  .cursor {
     font-family: "JetBrains Mono", monospace; color: var(--pink);
     animation: blink 1.1s steps(1) infinite;
   }
   @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---- Guestbook (approved messages only; see assets/messages.json) ---- */
+  .guestbook {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    border: 1px solid rgba(244, 95, 192, 0.28);
+    background:
+      radial-gradient(520px 130px at 10% 0%, rgba(244, 95, 192, 0.07), transparent 70%),
+      rgba(244, 95, 192, 0.03);
+    border-radius: 12px;
+    padding: 16px 20px 14px;
+    box-shadow: 0 0 26px rgba(244, 95, 192, 0.07);
+  }
+  .gb-head {
+    display: flex; align-items: center; gap: 10px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--pink);
+  }
+  .gb-count { color: var(--faint); letter-spacing: 0.5px; }
+  .gb-head .spacer { flex: 1; }
+  .gb-btn {
+    background: transparent; border: 1px solid rgba(244, 95, 192, 0.4);
+    color: var(--pink); border-radius: 7px; padding: 4px 12px;
+    font-family: "JetBrains Mono", monospace; font-size: 11.5px;
+    letter-spacing: 0.5px; cursor: pointer;
+  }
+  .gb-btn:hover { background: rgba(244, 95, 192, 0.10); }
+  .gb-view { height: 48px; overflow: hidden; margin-top: 10px; }
+  .gb-list { will-change: transform; }
+  .gb-item {
+    height: 24px; line-height: 24px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-size: 13px; color: #9aa3b8;
+  }
+  .gb-item b { color: var(--text); font-weight: 600; }
+  .gb-item .sep { color: var(--faint); margin: 0 7px; }
+  .gb-form { display: none; margin-top: 12px; gap: 8px; flex-wrap: wrap; }
+  .gb-form.open { display: flex; }
+  .gb-form input, .gb-form textarea {
+    background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line);
+    border-radius: 8px; color: var(--text); font-family: inherit; font-size: 13px;
+    padding: 8px 12px; outline: none;
+  }
+  .gb-form input:focus, .gb-form textarea:focus { border-color: rgba(244, 95, 192, 0.5); }
+  .gb-form input { width: 150px; }
+  .gb-form textarea { flex: 1; min-width: 200px; height: 38px; resize: none; }
+  .gb-hint {
+    flex-basis: 100%; font-size: 11.5px; color: var(--faint);
+    font-family: "JetBrains Mono", monospace;
+  }
 
   /* ---- About (always English) ---- */
   .about-card {
@@ -357,10 +408,29 @@
           <div class="shot"><img src="assets/shot-tuner.png" alt="Tuner"></div>
         </div>
       </div>
+
+      <div class="guestbook">
+        <div class="gb-head">
+          <span class="cursor">▍</span>
+          <span class="en-t">Guestbook</span><span class="zh-t">留言板</span>
+          <span class="gb-count" id="gbCount"></span>
+          <span class="spacer"></span>
+          <button class="gb-btn" onclick="gbToggle()"><span class="en-t">Leave a message</span><span class="zh-t">我要留言</span></button>
+        </div>
+        <div class="gb-view"><div class="gb-list" id="gbList"></div></div>
+        <form class="gb-form" id="gbForm" onsubmit="return gbSend(event)">
+          <input id="gbName" maxlength="24" placeholder="Name">
+          <textarea id="gbMsg" maxlength="200" placeholder="Say something…"></textarea>
+          <button class="gb-btn" type="submit"><span class="en-t">Send</span><span class="zh-t">发送</span></button>
+          <div class="gb-hint" id="gbHint">
+            <span class="en-t">Sends via email · shows up here once approved.</span>
+            <span class="zh-t">通过邮件发送 · 审核通过后展示。</span>
+          </div>
+        </form>
+      </div>
     </div>
 
     <div class="coming">
-      <span class="cursor">▍</span>
       <span class="en-t">More tools are on the workbench — stay tuned.</span>
       <span class="zh-t">更多工具正在工作台上打磨——敬请期待。</span>
     </div>
@@ -397,6 +467,51 @@
   function toggleLang() {
     document.body.classList.toggle('zh');
     localStorage.setItem('lang', document.body.classList.contains('zh') ? 'zh' : 'en');
+  }
+
+  // Guestbook — approved messages only, committed to assets/messages.json after review.
+  (function () {
+    var ROW = 24, VISIBLE = 2;
+    fetch('assets/messages.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (list) {
+        var box = document.getElementById('gbList');
+        list.forEach(function (m) {
+          var d = document.createElement('div'); d.className = 'gb-item';
+          var b = document.createElement('b'); b.textContent = m.name;
+          var s = document.createElement('span'); s.className = 'sep'; s.textContent = '·';
+          var t = document.createElement('span'); t.textContent = m.text;
+          d.appendChild(b); d.appendChild(s); d.appendChild(t);
+          box.appendChild(d);
+        });
+        document.getElementById('gbCount').textContent = '(' + list.length + ')';
+        if (list.length > VISIBLE) {
+          setInterval(function () {
+            box.style.transition = 'transform 0.5s ease';
+            box.style.transform = 'translateY(-' + ROW + 'px)';
+            setTimeout(function () {
+              box.style.transition = 'none';
+              box.appendChild(box.firstElementChild);
+              box.style.transform = 'translateY(0)';
+            }, 600);
+          }, 3200);
+        }
+      })
+      .catch(function () {});
+  })();
+  function gbToggle() { document.getElementById('gbForm').classList.toggle('open'); }
+  function gbSend(e) {
+    e.preventDefault();
+    var n = (document.getElementById('gbName').value.trim() || 'Anonymous');
+    var m = document.getElementById('gbMsg').value.trim();
+    if (!m) return false;
+    location.href = 'mailto:elmerhou@163.com'
+      + '?subject=' + encodeURIComponent('[Guestbook] ' + n)
+      + '&body=' + encodeURIComponent(m + '\n\n-- ' + n);
+    document.getElementById('gbHint').innerHTML =
+      '<span class="en-t">Mail app opened — your note shows up here once approved. Thanks!</span>'
+      + '<span class="zh-t">已打开邮件应用——审核通过后就会出现在这里，谢谢！</span>';
+    return false;
   }
 </script>
 </body>
