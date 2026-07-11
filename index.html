@@ -415,10 +415,11 @@
         <form class="gb-form" id="gbForm" onsubmit="return gbSend(event)">
           <input id="gbName" maxlength="24" placeholder="Name">
           <textarea id="gbMsg" maxlength="200" placeholder="Say something…"></textarea>
-          <button class="gb-btn" type="submit"><span class="en-t">Send</span><span class="zh-t">发送</span></button>
+          <input id="gbWeb" name="website" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="gb-btn" type="submit"><span class="en-t">Post</span><span class="zh-t">发布</span></button>
           <div class="gb-hint" id="gbHint">
-            <span class="en-t">Sends via email · shows up here once approved.</span>
-            <span class="zh-t">通过邮件发送 · 审核通过后展示。</span>
+            <span class="en-t">Posts show up right away — be nice :)</span>
+            <span class="zh-t">留言即刻显示——请友善发言 :)</span>
           </div>
         </form>
       </div>
@@ -463,48 +464,78 @@
     localStorage.setItem('lang', document.body.classList.contains('zh') ? 'zh' : 'en');
   }
 
-  // Guestbook — approved messages only, committed to assets/messages.json after review.
-  (function () {
-    var ROW = 24, VISIBLE = 2;
-    fetch('assets/messages.json', { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (list) {
-        var box = document.getElementById('gbList');
-        list.forEach(function (m) {
-          var d = document.createElement('div'); d.className = 'gb-item';
-          var b = document.createElement('b'); b.textContent = m.name;
-          var s = document.createElement('span'); s.className = 'sep'; s.textContent = '·';
-          var t = document.createElement('span'); t.textContent = m.text;
-          d.appendChild(b); d.appendChild(s); d.appendChild(t);
-          box.appendChild(d);
-        });
-        document.getElementById('gbCount').textContent = '(' + list.length + ')';
-        if (list.length > VISIBLE) {
-          setInterval(function () {
-            box.style.transition = 'transform 0.5s ease';
-            box.style.transform = 'translateY(-' + ROW + 'px)';
-            setTimeout(function () {
-              box.style.transition = 'none';
-              box.appendChild(box.firstElementChild);
-              box.style.transform = 'translateY(0)';
-            }, 600);
-          }, 3200);
-        }
-      })
-      .catch(function () {});
-  })();
+  // Guestbook — Supabase-backed; posts appear immediately, owner moderates by
+  // hiding/deleting rows in the dashboard. Falls back to messages.json if offline.
+  var SB = 'https://rkuranahncwlllerdomu.supabase.co/rest/v1/guestbook';
+  var SB_KEY = 'sb_publishable_YWcYg1bCBTNbFdpgSBXTaA_MXw4sJ3A';
+  var GB_ROW = 24, GB_VISIBLE = 2, gbTimer = null;
+  function gbRender(list) {
+    var box = document.getElementById('gbList');
+    box.innerHTML = '';
+    list.forEach(function (m) {
+      var d = document.createElement('div'); d.className = 'gb-item';
+      var b = document.createElement('b'); b.textContent = m.name;
+      var s = document.createElement('span'); s.className = 'sep'; s.textContent = '·';
+      var t = document.createElement('span'); t.textContent = m.text;
+      d.appendChild(b); d.appendChild(s); d.appendChild(t);
+      box.appendChild(d);
+    });
+    document.getElementById('gbCount').textContent = '(' + list.length + ')';
+    if (gbTimer) { clearInterval(gbTimer); gbTimer = null; }
+    box.style.transition = 'none';
+    box.style.transform = 'translateY(0)';
+    if (list.length > GB_VISIBLE) {
+      gbTimer = setInterval(function () {
+        box.style.transition = 'transform 0.5s ease';
+        box.style.transform = 'translateY(-' + GB_ROW + 'px)';
+        setTimeout(function () {
+          box.style.transition = 'none';
+          box.appendChild(box.firstElementChild);
+          box.style.transform = 'translateY(0)';
+        }, 600);
+      }, 3200);
+    }
+  }
+  function gbLoad() {
+    fetch(SB + '?select=name,text&order=created_at.desc&limit=50', { headers: { apikey: SB_KEY } })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(gbRender)
+      .catch(function () {
+        fetch('assets/messages.json', { cache: 'no-store' })
+          .then(function (r) { return r.json(); }).then(gbRender).catch(function () {});
+      });
+  }
+  gbLoad();
   function gbToggle() { document.getElementById('gbForm').classList.toggle('open'); }
+  function gbHint(en, zh) {
+    document.getElementById('gbHint').innerHTML =
+      '<span class="en-t"></span><span class="zh-t"></span>';
+    document.querySelector('#gbHint .en-t').textContent = en;
+    document.querySelector('#gbHint .zh-t').textContent = zh;
+  }
   function gbSend(e) {
     e.preventDefault();
-    var n = (document.getElementById('gbName').value.trim() || 'Anonymous');
+    if (document.getElementById('gbWeb').value) return false; /* honeypot */
     var m = document.getElementById('gbMsg').value.trim();
     if (!m) return false;
-    location.href = 'mailto:elmerhou@163.com'
-      + '?subject=' + encodeURIComponent('[Guestbook] ' + n)
-      + '&body=' + encodeURIComponent(m + '\n\n-- ' + n);
-    document.getElementById('gbHint').innerHTML =
-      '<span class="en-t">Mail app opened — your note shows up here once approved. Thanks!</span>'
-      + '<span class="zh-t">已打开邮件应用——审核通过后就会出现在这里，谢谢！</span>';
+    if (Date.now() - (+localStorage.getItem('gbLast') || 0) < 30000) {
+      gbHint('Easy there — wait a moment between posts.', '稍等一下再发下一条哦。');
+      return false;
+    }
+    var n = (document.getElementById('gbName').value.trim() || 'Anonymous').slice(0, 24);
+    fetch(SB, {
+      method: 'POST',
+      headers: { apikey: SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ name: n, text: m.slice(0, 200) })
+    }).then(function (r) {
+      if (!r.ok) throw 0;
+      localStorage.setItem('gbLast', String(Date.now()));
+      document.getElementById('gbMsg').value = '';
+      gbHint('Posted — thanks!', '已发布——谢谢！');
+      gbLoad();
+    }).catch(function () {
+      gbHint("Couldn't post right now — try again later.", '暂时发不出去——稍后再试。');
+    });
     return false;
   }
 </script>
