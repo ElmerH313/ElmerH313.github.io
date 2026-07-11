@@ -1,0 +1,23 @@
+index.html
+  15058a4f6d8fdecc 87,89-92,95-96,108,110,333-336
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "b45896f7907bc8f9e2aa9d8495be0708f2777f79",
+  "prompts": {
+    "15058a4f6d8fdecc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "894b109d-f611-46f6-a5ed-46ce95d91801",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ElmerHou",
+      "messages": [],
+      "total_additions": 13,
+      "total_deletions": 18,
+      "accepted_lines": 24,
+      "overriden_lines": 0
+    }
+  }
+}
