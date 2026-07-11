@@ -1,0 +1,25 @@
+README.md
+  6bfd78c29795b06e 61,63-70,74,78-80,89
+index.html
+  6bfd78c29795b06e 288,290,292,296,345
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "dcfd8be404707d7746bc31a4289ed06a312e01e8",
+  "prompts": {
+    "6bfd78c29795b06e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2abda490-603a-4472-84cd-c24aa7a2c0fe",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "ElmerHou",
+      "messages": [],
+      "total_additions": 20,
+      "total_deletions": 21,
+      "accepted_lines": 19,
+      "overriden_lines": 0
+    }
+  }
+}
