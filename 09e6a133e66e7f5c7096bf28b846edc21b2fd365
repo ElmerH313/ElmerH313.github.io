@@ -1,0 +1,25 @@
+index.html
+  15058a4f6d8fdecc 245-294,411-430,471-515
+assets/messages.json
+  15058a4f6d8fdecc 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "09e6a133e66e7f5c7096bf28b846edc21b2fd365",
+  "prompts": {
+    "15058a4f6d8fdecc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "894b109d-f611-46f6-a5ed-46ce95d91801",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ElmerHou",
+      "messages": [],
+      "total_additions": 124,
+      "total_deletions": 5,
+      "accepted_lines": 131,
+      "overriden_lines": 0
+    }
+  }
+}
