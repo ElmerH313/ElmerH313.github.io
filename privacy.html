@@ -4,62 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — GuitarMetro / Elmer.H</title>
-<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="icon" href="assets/logo-mark.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sky: #6dc4dc; --sky-deep: #579caf; --ink: #253444;
-    --paper: #ffffff; --pink: #e14fb2; --purple: #8a63e8;
-    --sticker-shadow: 0 10px 0 rgba(37, 52, 68, 0.18);
+    --bg: #0a0d13; --panel: #11141d; --panel-2: #151926;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: #d8dde8; --muted: #8b93a7; --faint: #5c6478;
+    --pink: #f45fc0; --purple: #9d7bff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: var(--sky); color: var(--ink);
-    font-family: "Baloo 2", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background:
+      radial-gradient(800px 400px at 30% -10%, rgba(157, 123, 255, 0.08), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: "Space Grotesk", "PingFang SC", "Microsoft YaHei", sans-serif;
     line-height: 1.7;
   }
+  ::selection { background: rgba(244, 95, 192, 0.35); }
+  .zh { display: none; }
+  body.zh-on .zh { display: block; }
   .wrap { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+  .topbar { display: flex; align-items: center; gap: 12px; }
   a.back {
-    display: inline-block; background: var(--ink); color: #fff;
-    text-decoration: none; font-size: 14px; font-weight: 700;
-    padding: 6px 18px; border-radius: 999px;
-    box-shadow: 0 4px 0 rgba(37,52,68,.2);
+    display: inline-block; color: var(--muted);
+    background: rgba(255, 255, 255, 0.03);
+    text-decoration: none; font-size: 13px; font-weight: 600;
+    font-family: "JetBrains Mono", monospace;
+    padding: 6px 16px; border: 1px solid var(--line); border-radius: 8px;
   }
-  a.back:hover { background: var(--pink); }
+  a.back:hover { color: var(--pink); border-color: rgba(244, 95, 192, 0.5); }
+  .spacer { flex: 1; }
+  .lang-btn {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 5px 14px; font-size: 12px; font-weight: 600; cursor: pointer;
+    font-family: "JetBrains Mono", monospace; letter-spacing: 0.5px;
+  }
+  .lang-btn:hover { color: var(--pink); border-color: rgba(244, 95, 192, 0.5); }
   .sheet {
-    margin-top: 24px; background: var(--paper); border-radius: 26px;
-    padding: 36px 40px; box-shadow: var(--sticker-shadow);
-    position: relative;
+    margin-top: 24px;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line); border-radius: 16px;
+    padding: 36px 40px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   }
-  .sheet::before {
-    content: ""; position: absolute; top: -13px; left: 60px;
-    width: 110px; height: 26px; transform: rotate(-3deg);
-    background: rgba(138, 99, 232, 0.4); border-radius: 4px;
+  h1 {
+    font-family: "Unbounded", sans-serif;
+    font-size: 21px; font-weight: 600; color: #fff; letter-spacing: 0.5px;
   }
-  h1 { font-size: 28px; font-weight: 800; }
-  .updated { color: #7d93a1; font-size: 13px; margin: 4px 0 22px; }
+  .updated {
+    color: var(--faint); font-size: 12px; margin: 8px 0 24px;
+    font-family: "JetBrains Mono", monospace;
+  }
   h2 {
-    margin: 26px 0 8px; font-family: "Patrick Hand", cursive;
-    font-size: 21px; color: var(--purple);
+    margin: 28px 0 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--purple);
   }
-  p, li { color: #3d5566; font-size: 15px; }
+  p, li { color: #aab2c5; font-size: 14.5px; }
   ul { margin: 8px 0 8px 22px; }
   .hero-line {
-    background: #fdeef8; border: 3px dashed #f3b7dd; border-radius: 16px;
-    padding: 14px 20px; margin-bottom: 8px; font-weight: 700; color: var(--ink);
+    background: rgba(244, 95, 192, 0.06);
+    border: 1px dashed rgba(244, 95, 192, 0.35); border-radius: 12px;
+    padding: 14px 20px; margin-bottom: 8px; font-weight: 600; color: #fff;
   }
-  .zh { color: #7d93a1; font-size: 14px; margin-top: 4px; }
-  a.mail { color: var(--pink); font-weight: 700; text-decoration: none; }
+  .hero-line .zh { font-weight: 400; }
+  .zh { color: var(--faint); font-size: 13.5px; margin-top: 4px; }
+  a.mail { color: var(--pink); font-weight: 600; text-decoration: none; }
+  a.mail:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="index.html">← Elmer.H</a>
+  <div class="topbar">
+    <a class="back" href="index.html">← Elmer.H</a>
+    <span class="spacer"></span>
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+  </div>
   <div class="sheet">
     <h1>Privacy Policy — GuitarMetro</h1>
-    <div class="updated">Last updated: 2026-07-11 · 适用应用：GuitarMetro（吉他节拍器）</div>
+    <div class="updated">Last updated: 2026-07-11 · GuitarMetro</div>
 
     <div class="hero-line">
       The short version: GuitarMetro collects nothing.
@@ -103,5 +132,19 @@
     <p>Questions? Email <a class="mail" href="mailto:elmerhou@163.com">elmerhou@163.com</a>.</p>
   </div>
 </div>
+<script>
+  // English-only by default; the toggle reveals the Chinese companion text (persisted).
+  (function () {
+    if (localStorage.getItem('lang') === 'zh') {
+      document.body.classList.add('zh-on');
+      document.getElementById('langBtn').textContent = 'EN';
+    }
+  })();
+  function toggleLang() {
+    var on = document.body.classList.toggle('zh-on');
+    localStorage.setItem('lang', on ? 'zh' : 'en');
+    document.getElementById('langBtn').textContent = on ? 'EN' : '中文';
+  }
+</script>
 </body>
 </html>
