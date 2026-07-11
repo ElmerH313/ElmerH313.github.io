@@ -58,27 +58,26 @@ python -m http.server 8642
 
 ## 发布（🔴 当前最重要待办）
 
-目标：GitHub Pages 用户主站。**网址取决于 GitHub 用户名**：
+目标：GitHub Pages 用户主站。**网址由 GitHub 用户名决定**：
 
-1. ✅ 已查：`elmerhou` **可用**，`elmerh` 已被占用（2026-07-11 查）
-2. 用户先把 GitHub 账号 **Houmj0313 改名为 elmerhou**（Settings → Account → Change username；旧仓库链接自动重定向，本地 GtMetronome 仓库建议顺手 `git remote set-url origin https://github.com/elmerhou/myGtMetro.git`）
-3. 新建**公开**仓库，名字精确为 **`elmerhou.github.io`**（网页端创建；AI 直接 API 建公开仓库会被安全策略拦截，需用户操作或明确授权）
-4. 本目录 `git push` 到该仓库 main 分支 → Pages 自动生效 → `https://elmerhou.github.io`
-5. **发布前全局替换**：`index.html` 里下载链接当前占位为
-   `https://github.com/Houmj0313/Houmj0313.github.io/releases/...`，改名后需替换为
-   `https://github.com/elmerhou/elmerhou.github.io/releases/...`
-6. 创建 Release（tag 建议 `guitarmetro-v0.5.0`）并上传三个安装包，让下载按钮生效：
-   - `A:\_Myself_\__GtMetronome__\dist\GuitarMetro-win64.zip`（14 MB）
-   - `...\GuitarMetro-macOS.zip`（20 MB，已公证）
-   - `...\GuitarMetro-android.apk`（58 MB，侧载版）
+1. ✅ 2026-07-11 账号已改名：**Houmj0313 → `ElmerH313`**（用户自行操作；本地两个仓库 remote 已同步新地址，凭据不受影响）→ 站点网址将是 **`https://elmerh313.github.io`**（Pages 域名自动小写）
+2. 🔴 新建**公开**仓库，名字精确为 **`ElmerH313.github.io`**（网页端创建；AI 直接 API 建公开仓库会被安全策略拦截，需用户操作或明确授权）
+3. 本目录 `git push` 到该仓库 main 分支 → Pages 自动生效
+4. ✅ `index.html` 下载链接已指向
+   `https://github.com/ElmerH313/ElmerH313.github.io/releases/download/guitarmetro-v0.6.0/...`（2026-07-11 已替换，版本号 v0.6.0）
+5. 创建 Release（tag 精确为 `guitarmetro-v0.6.0`，与链接一致）并上传安装包，让下载按钮生效：
+   - `A:\_Myself_\__GtMetronome__\dist\GuitarMetro-win64.zip`
+   - `...\GuitarMetro-macOS.zip`（已公证）
+   - `...\GuitarMetro-android.apk`（侧载版）
    - iOS 按钮已直连 TestFlight：https://testflight.apple.com/join/YmKxWtsj
    - GitHub token 可从凭据管理器取：`printf "protocol=https\nhost=github.com\n\n" | git credential fill`（password= 行）
-7. GuitarMetro 出新版后：上传新 Release 资产 + 更新 index.html 的版本号与链接 tag
+6. GuitarMetro 出新版后：上传新 Release 资产 + 更新 index.html 的版本号与链接 tag
 
 ## 待办清单
 
-- [ ] 用户改名 GitHub 账号 → elmerhou，并创建 `elmerhou.github.io` 公开仓库
-- [ ] 替换下载链接域名 → push 上线 → 挂 v0.5.0 安装包（见上）
+- [x] 2026-07-11 GitHub 账号改名 → ElmerH313；两仓库 remote、主页链接均已换新
+- [ ] 用户创建 `ElmerH313.github.io` 公开仓库
+- [ ] push 上线 → 挂 v0.6.0 安装包（见上）
 - [ ] GuitarMetro v0.6.0 发布后同步更新下载区（版本号、新功能卖点截图）
 - [ ] 微软商店 / App Store 上架后：把"即将上架"占位按钮换成真实商店徽章链接
 - [ ] （可选）自定义域名：买 elmerh.dev / elmerhou.com 之类 → 仓库 CNAME + DNS
@@ -87,5 +86,5 @@ python -m http.server 8642
 
 ## 关联项目
 
-- GuitarMetro 仓库：`A:\_Myself_\__GtMetronome__`（私有，github.com/Houmj0313/myGtMetro）
+- GuitarMetro 仓库：`A:\_Myself_\__GtMetronome__`（私有，github.com/ElmerH313/myGtMetro）
   其 wiki 在 `docs/`；本站截图/图标来自该项目，App 有大更新时记得回来同步下载区。
