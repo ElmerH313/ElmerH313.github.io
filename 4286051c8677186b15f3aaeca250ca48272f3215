@@ -1,0 +1,25 @@
+privacy.html
+  15058a4f6d8fdecc 78-83
+index.html
+  15058a4f6d8fdecc 314-339
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "4286051c8677186b15f3aaeca250ca48272f3215",
+  "prompts": {
+    "15058a4f6d8fdecc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "894b109d-f611-46f6-a5ed-46ce95d91801",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ElmerHou",
+      "messages": [],
+      "total_additions": 32,
+      "total_deletions": 0,
+      "accepted_lines": 43,
+      "overriden_lines": 0
+    }
+  }
+}
