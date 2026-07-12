@@ -175,6 +175,20 @@
   ul.feat li:nth-child(4)::before { color: var(--mint); }
   ul.feat li:nth-child(5)::before { color: var(--cyan); }
 
+  .manual-link {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 24px; padding: 10px 16px;
+    border: 1px solid rgba(88, 214, 255, 0.30); border-radius: 10px;
+    background: rgba(88, 214, 255, 0.05);
+    color: var(--cyan); text-decoration: none;
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px; letter-spacing: 0.3px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .manual-link:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 18px rgba(88, 214, 255, 0.18);
+  }
+  .manual-link .manual-arrow { margin-left: auto; }
   .dl-title {
     margin-top: 26px; font-family: "JetBrains Mono", monospace;
     font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
@@ -395,11 +409,17 @@
         </p>
         <ul class="feat">
           <li><span class="en-t">Tempo trainer: auto-ramping speed with progress ring</span><span class="zh-t">变速训练：自动分档爬升 + 进度环</span></li>
-          <li><span class="en-t">Built-in tuner: guitar / bass / ukulele, 17 tunings</span><span class="zh-t">内置调弦：吉他/贝斯/尤克里里，17 种调弦</span></li>
+          <li><span class="en-t">Built-in tuner: guitar / bass / ukulele, 18 tunings</span><span class="zh-t">内置调弦：吉他/贝斯/尤克里里，18 种调弦</span></li>
           <li><span class="en-t">Practice timer with yearly stats &amp; streaks</span><span class="zh-t">练琴计时：年度曲线与连续打卡</span></li>
           <li><span class="en-t">3 independent voices, 15 meters, 8 subdivisions</span><span class="zh-t">三声部独立音色，15 种拍号、8 种细分</span></li>
           <li><span class="en-t">12 languages · Windows / macOS / iOS / Android</span><span class="zh-t">12 语言 · Windows / macOS / iOS / Android 全平台</span></li>
         </ul>
+
+        <a class="manual-link" href="manual.html">
+          <span class="manual-ico">📖</span>
+          <span class="en-t">Full user manual — every control, every parameter</span><span class="zh-t">完整使用说明书——每个控件、每个参数</span>
+          <span class="manual-arrow">→</span>
+        </a>
 
         <div class="dl-title"><span class="en-t">Download · v1.0.0</span><span class="zh-t">下载 · v1.0.0</span></div>
         <div class="dl-row">

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GuitarMetro — User Manual / 使用说明书</title>
+<meta name="description" content="The complete GuitarMetro user manual — every control and every parameter, in English and Chinese.">
+<link rel="icon" href="assets/logo-mark.png" type="image/png">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --bg: #0a0d13; --panel: #11141d; --panel-2: #151926;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: #d8dde8; --muted: #8b93a7; --faint: #5c6478;
+    --pink: #f45fc0; --purple: #9d7bff; --cyan: #58d6ff;
+    --mint: #3fd6a5; --orange: #f0993f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(900px 480px at 18% -8%, rgba(157, 123, 255, 0.10), transparent 60%),
+      radial-gradient(800px 420px at 85% -4%, rgba(244, 95, 192, 0.07), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: "Space Grotesk", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(244, 95, 192, 0.35); }
+  .zh-t { display: none; }
+  body.zh .zh-t { display: inline; }
+  body.zh .en-t { display: none; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 90px; }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(10, 13, 19, 0.85);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    max-width: 880px; margin: 0 auto;
+    display: flex; align-items: center; gap: 16px;
+    padding: 13px 24px;
+  }
+  .back {
+    color: var(--muted); text-decoration: none;
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px;
+    border: 1px solid var(--line); border-radius: 8px; padding: 5px 14px;
+    white-space: nowrap;
+  }
+  .back:hover { color: var(--pink); border-color: rgba(244, 95, 192, 0.5); }
+  .nav-title {
+    font-family: "Unbounded", sans-serif; font-weight: 600;
+    font-size: 13px; letter-spacing: 0.5px; color: #fff;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .nav .spacer { flex: 1; }
+  .lang-btn {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 5px 14px; font-size: 12px; font-weight: 600; cursor: pointer;
+    font-family: "JetBrains Mono", monospace; letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .lang-btn:hover { color: var(--pink); border-color: rgba(244, 95, 192, 0.5); }
+
+  .hero { padding: 46px 0 8px; display: flex; align-items: center; gap: 20px; }
+  .hero img {
+    width: 76px; height: 76px; border-radius: 18px;
+    border: 1px solid var(--line); box-shadow: 0 10px 28px rgba(0,0,0,.45);
+  }
+  h1 {
+    font-family: "Unbounded", sans-serif; font-weight: 800;
+    font-size: 26px; letter-spacing: 1px; color: #fff; line-height: 1.25;
+  }
+  .hero .sub {
+    margin-top: 6px; color: var(--muted); font-size: 13.5px;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .hero .sub .v { color: var(--cyan); }
+
+  .toc {
+    margin-top: 26px;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px;
+  }
+  .toc-title {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--pink);
+    margin-bottom: 10px;
+  }
+  .toc ol { margin-left: 20px; columns: 2; column-gap: 34px; }
+  .toc li { font-size: 13.5px; margin-bottom: 5px; break-inside: avoid; }
+  .toc a { color: var(--muted); text-decoration: none; }
+  .toc a:hover { color: var(--cyan); }
+
+  h2 {
+    display: flex; align-items: center; gap: 12px;
+    margin: 48px 0 16px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--pink);
+  }
+  h2::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(244, 95, 192, 0.35), transparent);
+  }
+  h3 {
+    margin: 22px 0 8px; font-size: 15.5px; font-weight: 700; color: #fff;
+  }
+  h3 .tag {
+    font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 400;
+    color: var(--faint); margin-left: 8px; letter-spacing: 0.5px;
+  }
+  p, li { color: #aab2c5; font-size: 14px; }
+  section ul { margin: 6px 0 10px 22px; }
+  section li { margin-bottom: 5px; }
+  b { color: var(--text); }
+  .kbd {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+    border-bottom-width: 2px; border-radius: 6px; padding: 1px 7px;
+    color: var(--cyan); white-space: nowrap;
+  }
+  .pill {
+    display: inline-block; font-family: "JetBrains Mono", monospace;
+    font-size: 11px; border: 1px solid rgba(88, 214, 255, 0.35);
+    color: var(--cyan); border-radius: 999px; padding: 1px 10px; margin-left: 8px;
+    vertical-align: 2px;
+  }
+  .pill.desktop { border-color: rgba(157, 123, 255, 0.4); color: var(--purple); }
+  .note {
+    border: 1px dashed rgba(240, 153, 63, 0.4); background: rgba(240, 153, 63, 0.05);
+    border-radius: 10px; padding: 10px 16px; margin: 10px 0; font-size: 13px;
+    color: #c9b39a;
+  }
+  .tip {
+    border: 1px dashed rgba(63, 214, 165, 0.35); background: rgba(63, 214, 165, 0.05);
+    border-radius: 10px; padding: 10px 16px; margin: 10px 0; font-size: 13px;
+    color: #9ec9ba;
+  }
+
+  .tbl-wrap { overflow-x: auto; margin: 10px 0 14px; border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 13px; }
+  th {
+    text-align: left; font-family: "JetBrains Mono", monospace; font-weight: 600;
+    font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--faint); background: rgba(255,255,255,0.03);
+    padding: 8px 14px; border-bottom: 1px solid var(--line);
+  }
+  td { padding: 7px 14px; border-bottom: 1px solid rgba(255,255,255,0.045); color: #aab2c5; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.c1 { color: var(--text); font-weight: 600; white-space: nowrap; }
+  .mono { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--cyan); }
+
+  footer {
+    margin-top: 70px; border-top: 1px solid var(--line); padding-top: 24px;
+    color: var(--faint); font-size: 12.5px; font-family: "JetBrains Mono", monospace;
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--pink); }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 16px 70px; }
+    .nav { padding: 11px 16px; gap: 10px; }
+    .nav-title { font-size: 11px; }
+    .hero { gap: 14px; padding-top: 32px; }
+    .hero img { width: 58px; height: 58px; border-radius: 14px; }
+    h1 { font-size: 19px; }
+    .toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="back" href="index.html">← Elmer.H</a>
+    <div class="nav-title">GuitarMetro <span class="en-t">Manual</span><span class="zh-t">使用说明书</span></div>
+    <span class="spacer"></span>
+    <button class="lang-btn" onclick="toggleLang()"><span class="en-t">中文</span><span class="zh-t">EN</span></button>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="hero">
+  <img src="assets/guitarmetro-icon.png" alt="GuitarMetro icon">
+  <div>
+    <h1>GuitarMetro <span class="en-t">User Manual</span><span class="zh-t">使用说明书</span></h1>
+    <div class="sub"><span class="v">v1.0.0</span> · Windows / macOS / iOS / Android · <span class="en-t">12 languages</span><span class="zh-t">12 种语言</span></div>
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title"><span class="en-t">// Contents</span><span class="zh-t">// 目录</span></div>
+  <ol>
+    <li><a href="#overview"><span class="en-t">Overview</span><span class="zh-t">总览</span></a></li>
+    <li><a href="#bpm"><span class="en-t">BPM &amp; the LED dial</span><span class="zh-t">BPM 与 LED 表盘</span></a></li>
+    <li><a href="#meter"><span class="en-t">Time signatures &amp; beat accents</span><span class="zh-t">拍号与逐拍重音</span></a></li>
+    <li><a href="#subdivision"><span class="en-t">Subdivisions</span><span class="zh-t">细分</span></a></li>
+    <li><a href="#swing"><span class="en-t">Swing</span><span class="zh-t">摇摆 Swing</span></a></li>
+    <li><a href="#sound"><span class="en-t">Sounds &amp; volume</span><span class="zh-t">音效与音量</span></a></li>
+    <li><a href="#presets"><span class="en-t">Presets</span><span class="zh-t">预设</span></a></li>
+    <li><a href="#trainer"><span class="en-t">Tempo Trainer</span><span class="zh-t">变速训练</span></a></li>
+    <li><a href="#countin"><span class="en-t">Count-in</span><span class="zh-t">预备拍</span></a></li>
+    <li><a href="#flash"><span class="en-t">Beat flash</span><span class="zh-t">爆闪</span></a></li>
+    <li><a href="#tuner"><span class="en-t">Tuner</span><span class="zh-t">调弦</span></a></li>
+    <li><a href="#timer"><span class="en-t">Practice timer &amp; stats</span><span class="zh-t">练琴计时与统计</span></a></li>
+    <li><a href="#shortcuts"><span class="en-t">Keyboard shortcuts</span><span class="zh-t">键盘快捷键</span></a></li>
+    <li><a href="#desktop"><span class="en-t">Desktop extras</span><span class="zh-t">桌面小工具</span></a></li>
+    <li><a href="#drawer"><span class="en-t">Options drawer</span><span class="zh-t">选项抽屉</span></a></li>
+    <li><a href="#data"><span class="en-t">Saving, languages &amp; privacy</span><span class="zh-t">保存、语言与隐私</span></a></li>
+  </ol>
+</div>
+
+<section id="overview">
+  <h2><span class="en-t">1 · Overview</span><span class="zh-t">1 · 总览</span></h2>
+  <p>
+    <span class="en-t">GuitarMetro is a metronome built for serious practice: every click is rendered
+    into the audio stream at exact sample positions and driven by your sound card's clock,
+    so the beat never drifts or jitters. The app has three tabs:</span>
+    <span class="zh-t">GuitarMetro 是为认真练琴而做的节拍器：每一声 click 都以精确的采样点位置
+    直接合成进音频流、由声卡时钟驱动，节拍永不漂移、永不抖动。应用共三个页签：</span>
+  </p>
+  <ul>
+    <li><b>Tuner<span class="zh-t"> 调音</span></b> — <span class="en-t">reference-tone tuner for guitar / bass / ukulele.</span><span class="zh-t">吉他 / 贝斯 / 尤克里里参考音调弦。</span></li>
+    <li><b>Fixed Tempo<span class="zh-t"> 固定速度</span></b> — <span class="en-t">the main metronome page (opens by default).</span><span class="zh-t">主节拍器页（启动默认页）。</span></li>
+    <li><b>Tempo Trainer<span class="zh-t"> 变速训练</span></b> — <span class="en-t">automatic speed-ramping practice sessions.</span><span class="zh-t">自动爬速的变速训练。</span></li>
+  </ul>
+  <p>
+    <span class="en-t">Switching tabs always stops playback, so two pages can never sound at once.
+    The in-app guide (☰ → User guide) covers the same ground as this page.</span>
+    <span class="zh-t">切换页签会自动停止播放，两页绝不会同时出声。应用内也有一份说明（☰ → 使用说明），内容与本页一致。</span>
+  </p>
+</section>
+
+<section id="bpm">
+  <h2><span class="en-t">2 · BPM &amp; the LED dial</span><span class="zh-t">2 · BPM 与 LED 表盘</span></h2>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Parameter</span><span class="zh-t">参数</span></th><th><span class="en-t">Value</span><span class="zh-t">取值</span></th></tr>
+    <tr><td class="c1"><span class="en-t">BPM range</span><span class="zh-t">BPM 范围</span></td><td><span class="mono">20 – 400</span>, <span class="en-t">default</span><span class="zh-t">默认</span> <span class="mono">120</span></td></tr>
+    <tr><td class="c1"><span class="en-t">Dial drag</span><span class="zh-t">表盘拖动</span></td><td><span class="en-t">drag the dial vertically —</span><span class="zh-t">在表盘上垂直拖动——</span> <span class="mono">7 px = 1 BPM</span><span class="en-t"> (up = faster)</span><span class="zh-t">（向上加速）</span></td></tr>
+    <tr><td class="c1"><span class="en-t">Mouse wheel</span><span class="zh-t">鼠标滚轮</span></td><td><span class="mono">±1 BPM</span> <span class="en-t">per tick, on the dial or in the mini window</span><span class="zh-t">每格，表盘上或浮窗内均可</span></td></tr>
+    <tr><td class="c1">− / ＋</td><td><span class="mono">±1 BPM</span></td></tr>
+    <tr><td class="c1"><span class="en-t">Keyboard</span><span class="zh-t">键盘</span></td><td><span class="kbd">↑</span> / <span class="kbd">↓</span> = <span class="mono">±1 BPM</span><span class="en-t"> (Fixed Tempo tab only)</span><span class="zh-t">（仅固定速度页）</span></td></tr>
+  </table></div>
+  <h3>TAP <span class="en-t">tempo</span><span class="zh-t">测速</span></h3>
+  <p>
+    <span class="en-t">Tap the TAP button in time with the music. The app averages your most recent
+    taps (up to the last 5) and sets the BPM. If you pause for more than 2 seconds,
+    measurement resets and starts fresh. At least 2 taps are needed.</span>
+    <span class="zh-t">跟着音乐节奏点按 TAP 键，应用取最近的敲击（最多 5 次）求平均并设为当前
+    BPM。停顿超过 2 秒自动重新测量；至少需要敲 2 次。</span>
+  </p>
+  <h3><span class="en-t">Beat ring</span><span class="zh-t">节拍环</span></h3>
+  <p>
+    <span class="en-t">The outer ring splits into one segment per beat. The current beat glows as it
+    travels; downbeat segments stay lit in pale blue-white. During a count-in, or on the last
+    measure of a trainer stage, the whole ring turns orange.</span>
+    <span class="zh-t">外圈按拍数切分，当前拍的光斑流转经过，强拍段常亮淡蓝白。预备拍期间、以及变速训练每档的最后一小节，整环转为橙色。</span>
+  </p>
+</section>
+
+<section id="meter">
+  <h2><span class="en-t">3 · Time signatures &amp; beat accents</span><span class="zh-t">3 · 拍号与逐拍重音</span></h2>
+  <p>
+    <span class="en-t">Open the meter panel from the bottom quick bar. 15 time signatures are available
+    (default 4/4):</span>
+    <span class="zh-t">从底部快捷栏打开拍号面板，共 15 种拍号（默认 4/4）：</span>
+  </p>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Group</span><span class="zh-t">分组</span></th><th><span class="en-t">Time signatures</span><span class="zh-t">拍号</span></th></tr>
+    <tr><td class="c1">x/4</td><td class="mono">1/4 · 2/4 · 3/4 · 4/4 · 5/4 · 6/4 · 7/4</td></tr>
+    <tr><td class="c1">x/2</td><td class="mono">2/2 · 3/2</td></tr>
+    <tr><td class="c1">x/8</td><td class="mono">3/8 · 5/8 · 6/8 · 7/8 · 9/8 · 12/8</td></tr>
+  </table></div>
+  <p>
+    <span class="en-t">Compound meters come with musically sensible secondary accents out of the box —
+    e.g. 12/8 accents beats 1 · 4 · 7 · 10, and 7/8 accents 1 · 4 · 6.</span>
+    <span class="zh-t">复合拍自带符合乐理的次强拍——如 12/8 默认在第 1·4·7·10 拍，7/8 在第 1·4·6 拍。</span>
+  </p>
+  <h3><span class="en-t">Per-beat accents (Groove)</span><span class="zh-t">逐拍重音（律动）</span></h3>
+  <p>
+    <span class="en-t">In the meter panel, tap any beat dot to cycle its level:</span>
+    <span class="zh-t">在拍号面板中点按任意拍点，循环切换该拍的强弱级别：</span>
+    <b><span class="en-t">accent → secondary → normal → mute</span><span class="zh-t">强 → 次强 → 普通 → 静音</span></b>.
+  </p>
+  <ul>
+    <li><span class="en-t"><b>Accent</b> — accent timbre at full volume.</span><span class="zh-t"><b>强拍</b>——重拍音色、全音量。</span></li>
+    <li><span class="en-t"><b>Secondary</b> — accent timbre at 55% volume.</span><span class="zh-t"><b>次强拍</b>——重拍音色、55% 音量。</span></li>
+    <li><span class="en-t"><b>Normal</b> — weak-beat timbre.</span><span class="zh-t"><b>普通拍</b>——轻拍音色。</span></li>
+    <li><span class="en-t"><b>Mute</b> (red ×) — silences only that beat; subdivisions keep playing through it.</span><span class="zh-t"><b>静音</b>（红色 ×）——只静音该拍本身，细分声部照常发声。</span></li>
+  </ul>
+  <p>
+    <span class="en-t">"Reset all" restores the meter's default accent map. Changing the time signature
+    also resets accents to that meter's defaults. Your accent map is saved with presets.</span>
+    <span class="zh-t">「全部恢复默认」还原该拍号的默认重音；切换拍号也会重置为新拍号的默认值。逐拍重音会随预设一起保存。</span>
+  </p>
+</section>
+
+<section id="subdivision">
+  <h2><span class="en-t">4 · Subdivisions</span><span class="zh-t">4 · 细分</span></h2>
+  <p>
+    <span class="en-t">Each beat can be subdivided into equal clicks played by the dedicated subdivision
+    voice. 8 options (default: quarter notes = no subdivision):</span>
+    <span class="zh-t">每一拍可等分为若干下，由独立的细分声部发声。共 8 种（默认四分音符 = 不细分）：</span>
+  </p>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Subdivision</span><span class="zh-t">细分</span></th><th><span class="en-t">Clicks per beat</span><span class="zh-t">每拍击数</span></th><th><span class="en-t">Symbol</span><span class="zh-t">符号</span></th></tr>
+    <tr><td class="c1"><span class="en-t">Quarter notes</span><span class="zh-t">四分音符</span></td><td>1</td><td class="mono">♩</td></tr>
+    <tr><td class="c1"><span class="en-t">Eighth notes</span><span class="zh-t">八分音符</span></td><td>2</td><td class="mono">♫</td></tr>
+    <tr><td class="c1"><span class="en-t">Triplets</span><span class="zh-t">三连音</span></td><td>3</td><td class="mono">♪³</td></tr>
+    <tr><td class="c1"><span class="en-t">Sixteenth notes</span><span class="zh-t">十六分音符</span></td><td>4</td><td class="mono">♬</td></tr>
+    <tr><td class="c1"><span class="en-t">Quintuplets</span><span class="zh-t">五连音</span></td><td>5</td><td class="mono">♪⁵</td></tr>
+    <tr><td class="c1"><span class="en-t">Sextuplets</span><span class="zh-t">六连音</span></td><td>6</td><td class="mono">♪⁶</td></tr>
+    <tr><td class="c1"><span class="en-t">Septuplets</span><span class="zh-t">七连音</span></td><td>7</td><td class="mono">♪⁷</td></tr>
+    <tr><td class="c1"><span class="en-t">Thirty-second notes</span><span class="zh-t">三十二分音符</span></td><td>8</td><td class="mono">♬♬</td></tr>
+  </table></div>
+  <p>
+    <span class="en-t">The quick-bar button shows the current meter, with the subdivision symbol beneath
+    it whenever something other than quarter notes is selected. The ⟲ button in the panel
+    resets to 4/4 · quarter notes (and turns swing off).</span>
+    <span class="zh-t">快捷栏按钮键面显示当前拍号，选了非四分音符时在下方显示细分符号。面板中的 ⟲ 一键回到 4/4 · 四分音符（同时关闭 Swing）。</span>
+  </p>
+</section>
+
+<section id="swing">
+  <h2><span class="en-t">5 · Swing</span><span class="zh-t">5 · 摇摆 Swing</span></h2>
+  <p>
+    <span class="en-t">Swing delays every off-beat subdivision click to create shuffle feel. Toggle it at
+    the top of the meter panel; downbeats always stay on the grid.</span>
+    <span class="zh-t">Swing 会推迟每个反拍细分的时值形成摇摆律动。开关在拍号面板顶部；正拍永远保持在网格上。</span>
+  </p>
+  <ul>
+    <li><span class="en-t"><b>Ratio</b>: 50–75%, default 2/3 (66.7%, the classic shuffle). Magnetic snap at 50% and 2/3.</span><span class="zh-t"><b>比例</b>：50–75%，默认 2/3（66.7%，经典 Shuffle）；在 50% 与 2/3 处有磁性吸附。</span></li>
+    <li><span class="en-t"><b>Detent chips</b>: Straight 50% · Light 58% · Shuffle 2/3 · Hard 75%.</span><span class="zh-t"><b>快捷档</b>：平直 50% · 轻摇 58% · 三连 Shuffle 2/3 · 硬摇 75%。</span></li>
+    <li><span class="en-t"><b>Compatibility</b>: swing needs eighth or sixteenth subdivisions. Enabling it on anything else auto-switches to eighths (your previous choice is remembered and restored when swing turns off); while on, incompatible wheel entries grey out.</span><span class="zh-t"><b>兼容性</b>：Swing 需要八分或十六分细分。在其他细分下开启会自动切到八分（原选择被记住，关闭 Swing 后恢复）；开启期间不兼容的细分项变灰不可选。</span></li>
+  </ul>
+</section>
+
+<section id="sound">
+  <h2><span class="en-t">6 · Sounds &amp; volume</span><span class="zh-t">6 · 音效与音量</span></h2>
+  <p>
+    <span class="en-t">Three independent voices, each with its own timbre (☰ drawer → Click sounds,
+    with instant preview) and its own volume (quick bar → Volume):</span>
+    <span class="zh-t">三个独立声部，各自可选音色（☰ 抽屉 → 音效，选择即试听）和独立音量（快捷栏 → 音量）：</span>
+  </p>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Voice</span><span class="zh-t">声部</span></th><th><span class="en-t">Plays on</span><span class="zh-t">发声位置</span></th><th><span class="en-t">Default timbre</span><span class="zh-t">默认音色</span></th></tr>
+    <tr><td class="c1"><span class="en-t">Downbeat</span><span class="zh-t">重拍</span></td><td><span class="en-t">accented beats (secondary accents use this timbre at 55%)</span><span class="zh-t">强拍（次强拍用同音色的 55% 音量）</span></td><td><span class="en-t">High beep</span><span class="zh-t">高音哔</span></td></tr>
+    <tr><td class="c1"><span class="en-t">Weak beats</span><span class="zh-t">轻拍</span></td><td><span class="en-t">normal beats</span><span class="zh-t">普通拍</span></td><td><span class="en-t">Mid beep</span><span class="zh-t">中音哔</span></td></tr>
+    <tr><td class="c1"><span class="en-t">Subdivision</span><span class="zh-t">细分</span></td><td><span class="en-t">off-beat subdivision clicks (suppressed where they coincide with a beat)</span><span class="zh-t">反拍细分（与正拍重叠处不发声）</span></td><td><span class="en-t">Low beep</span><span class="zh-t">低音哔</span></td></tr>
+  </table></div>
+  <p><span class="en-t">The 5 timbres, all parametrically synthesized (no samples):</span><span class="zh-t">5 种音色，全部参数化合成（无采样素材）：</span></p>
+  <ul>
+    <li><span class="en-t"><b>High beep</b> (1760 Hz) · <b>Mid beep</b> (1175 Hz) · <b>Low beep</b> (880 Hz) — clean sine bursts.</span><span class="zh-t"><b>高音哔</b>（1760 Hz）·<b>中音哔</b>（1175 Hz）·<b>低音哔</b>（880 Hz）——干净的正弦短音。</span></li>
+    <li><span class="en-t"><b>Woodblock</b> — 760 + 1900 Hz, fast decay.</span><span class="zh-t"><b>木鱼</b>——760 + 1900 Hz，快速衰减。</span></li>
+    <li><span class="en-t"><b>Tick</b> — noise burst + 2600 Hz.</span><span class="zh-t"><b>嗒嗒</b>——噪声脉冲 + 2600 Hz。</span></li>
+  </ul>
+  <h3><span class="en-t">Volume model</span><span class="zh-t">音量模型</span></h3>
+  <ul>
+    <li><span class="en-t"><b>Master volume</b> — stepless, applies globally and instantly (even mid-training).</span><span class="zh-t"><b>总音量</b>——无级，全局实时生效（训练中也可即时调）。</span></li>
+    <li><span class="en-t"><b>Per-voice volumes</b> — 10 steps each; drag to zero to mute that voice.</span><span class="zh-t"><b>分声部音量</b>——各 10 格；拖到底即静音该声部。</span></li>
+  </ul>
+  <div class="tip">
+    <span class="en-t">Don't want an accent at all? Set the Downbeat voice to the same timbre as Weak
+    beats, or drag its volume to zero.</span>
+    <span class="zh-t">不想要重音？把重拍声部改成与轻拍相同的音色，或把重拍音量拖到 0。</span>
+  </div>
+</section>
+
+<section id="presets">
+  <h2><span class="en-t">7 · Presets</span><span class="zh-t">7 · 预设</span></h2>
+  <p>
+    <span class="en-t">5 slots per page, independent between the two metronome pages (quick bar → Presets):</span>
+    <span class="zh-t">每页 5 个槽位，两个节拍器页各自独立（快捷栏 → 预设）：</span>
+  </p>
+  <ul>
+    <li><span class="en-t"><b>Fixed Tempo preset stores</b>: BPM, time signature, subdivision, swing on/off + ratio, per-beat accent map.</span><span class="zh-t"><b>固定速度预设保存</b>：BPM、拍号、细分、Swing 开关与比例、逐拍重音。</span></li>
+    <li><span class="en-t"><b>Trainer preset stores</b>: duration, start BPM, target BPM, smoothness.</span><span class="zh-t"><b>训练预设保存</b>：时长、起始速度、目标速度、平滑度。</span></li>
+    <li><span class="en-t"><b>Row actions</b>: tap a row = load · 💾 = save / overwrite · 🗑 = delete.</span><span class="zh-t"><b>操作</b>：点行 = 读取 · 💾 = 保存/覆盖 · 🗑 = 删除。</span></li>
+  </ul>
+</section>
+
+<section id="trainer">
+  <h2><span class="en-t">8 · Tempo Trainer</span><span class="zh-t">8 · 变速训练</span></h2>
+  <p>
+    <span class="en-t">The trainer ramps the tempo automatically from a start BPM to a target BPM over a
+    chosen duration — ideal for building speed gradually.</span>
+    <span class="zh-t">变速训练在设定时长内自动把速度从起始 BPM 爬升到目标 BPM——循序渐进提速的利器。</span>
+  </p>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Parameter</span><span class="zh-t">参数</span></th><th><span class="en-t">Range</span><span class="zh-t">范围</span></th><th><span class="en-t">Default</span><span class="zh-t">默认</span></th></tr>
+    <tr><td class="c1"><span class="en-t">Duration</span><span class="zh-t">时长</span></td><td><span class="mono">1 – 30 min</span><span class="en-t"> (1-min steps)</span><span class="zh-t">（1 分钟步进）</span></td><td class="mono">5 min</td></tr>
+    <tr><td class="c1"><span class="en-t">Start / Target BPM</span><span class="zh-t">起始 / 目标速度</span></td><td><span class="mono">20 – 400</span><span class="en-t"> (dual wheel or direct typing; the two values push each other so start ≤ target)</span><span class="zh-t">（双滚轮或直接输入；两值联动推挤，起始 ≤ 目标）</span></td><td class="mono">60 → 120</td></tr>
+    <tr><td class="c1"><span class="en-t">Smoothness</span><span class="zh-t">平滑度</span></td><td><span class="en-t">stepless 0–1: Stepped / Medium / Smooth</span><span class="zh-t">无级 0–1：阶梯 / 适中 / 平滑</span></td><td class="mono">0.5</td></tr>
+  </table></div>
+  <h3><span class="en-t">How stages are computed</span><span class="zh-t">档位如何计算</span></h3>
+  <ul>
+    <li><span class="en-t">Smoothness maps to the BPM increment per stage: fully stepped = <b>+10 BPM</b> per stage, fully smooth = <b>+1 BPM</b> per stage (range +1…+10).</span><span class="zh-t">平滑度决定每档增幅：最阶梯 = 每档 <b>+10 BPM</b>，最平滑 = 每档 <b>+1 BPM</b>（范围 +1…+10）。</span></li>
+    <li><span class="en-t">The total duration is split evenly across stages, then each stage is rounded to whole measures — speed changes always land exactly on a measure boundary.</span><span class="zh-t">总时长均分到各档后按整小节取整——变速永远精确落在小节线上。</span></li>
+    <li><span class="en-t">Each speed change is preceded by a one-measure count-in at the new tempo (not counted into the duration; skipped seamlessly if count-in is off).</span><span class="zh-t">每次变速前先以新速度数一小节预备拍（不计入时长；关闭预备拍则无缝衔接）。</span></li>
+  </ul>
+  <h3><span class="en-t">During training</span><span class="zh-t">训练进行中</span></h3>
+  <ul>
+    <li><span class="en-t"><b>Progress ring dial</b>: the inner ring fills clockwise with overall session progress; the center shows start → target, the current BPM large, and the per-stage increment.</span><span class="zh-t"><b>进度环表盘</b>：内环顺时针填充整体训练进度；中心显示 起始 → 目标、当前速度大字和每档增幅。</span></li>
+    <li><span class="en-t"><b>Stage line</b>: "Stage 3/12 · 2 left" plus a measure countdown like <span class="mono">5/32</span>; on the last measure of a stage the ring and countdown turn orange.</span><span class="zh-t"><b>档位行</b>：如「第 3/12 档 · 剩余 2」加小节倒计时 <span class="mono">5/32</span>；每档最后一小节整环与倒计时转橙。</span></li>
+    <li><span class="en-t"><b>Locked during a run</b>: time signature, subdivision, presets and the plan itself. <b>Still adjustable</b>: master volume (instant), per-voice volumes and timbres (apply from the next measure).</span><span class="zh-t"><b>训练中锁定</b>：拍号、细分、预设与训练方案本身。<b>仍可调</b>：总音量（即时）、分声部音量与音色（下一小节头生效）。</span></li>
+  </ul>
+</section>
+
+<section id="countin">
+  <h2><span class="en-t">9 · Count-in</span><span class="zh-t">9 · 预备拍</span></h2>
+  <p>
+    <span class="en-t">Default <b>on</b> (☰ drawer → Count-in). Before playback starts — and before every
+    trainer speed change — the app counts one measure at the target tempo with a distinct low
+    click. The big BPM number blinks once per beat and turns orange, and the beat ring turns
+    orange, so you always know it's a count-in and not the real thing.</span>
+    <span class="zh-t">默认<b>开启</b>（☰ 抽屉 → 预备拍）。开始播放前——以及变速训练每次换速前——先以目标速度用独立的低音咔声数一小节。期间 BPM
+    大字随拍闪烁并变橙、节拍环整体转橙，一眼可辨是预备拍而非正式节拍。</span>
+  </p>
+</section>
+
+<section id="flash">
+  <h2><span class="en-t">10 · Beat flash</span><span class="zh-t">10 · 爆闪</span></h2>
+  <ul>
+    <li><span class="en-t">Default <b>off</b> (☰ drawer → Beat flash). When on, the LED glow surges at each beat onset and decays over 0.12 s — downbeats at full intensity, other beats at 60%.</span><span class="zh-t">默认<b>关闭</b>（☰ 抽屉 → 爆闪）。开启后灯光光晕在每拍起点骤亮、0.12 秒内衰减——重拍全亮，其他拍 60%。</span></li>
+    <li><span class="en-t">Sub-option <b>"Flash on downbeat only"</b> (default off) limits the surge to downbeats.</span><span class="zh-t">子开关<b>「仅重拍爆闪」</b>（默认关）——只在重拍骤亮。</span></li>
+    <li><span class="en-t">No flashing during count-ins.</span><span class="zh-t">预备拍期间不爆闪。</span></li>
+  </ul>
+</section>
+
+<section id="tuner">
+  <h2><span class="en-t">11 · Tuner</span><span class="zh-t">11 · 调弦</span></h2>
+  <p>
+    <span class="en-t">A reference-tone tuner (it plays notes for you to match by ear — it does not use the
+    microphone). Pick instrument → string count → tuning; tap a peg on the visual headstock to
+    hear that string, modeled with Karplus-Strong plucked-string synthesis per instrument. The
+    tone repeats every 3.5 seconds until you tap again (or press
+    <span class="kbd">Space</span> to replay). Selections persist across launches.</span>
+    <span class="zh-t">参考音式调弦（播放标准音让你用耳朵对齐——不使用麦克风拾音）。选乐器 → 弦数 → 调弦类型；在可视化琴头上点弦钮即听该弦参考音，音色按乐器用
+    Karplus-Strong 拨弦建模合成。参考音每 3.5 秒自动重复，再点一次停止（<span class="kbd">Space</span> 可重播）。所有选择自动记忆。</span>
+  </p>
+  <ul>
+    <li><span class="en-t"><b>Reference pitch (A4)</b>: 432 / 434 / 436 / 438 / 439 / 440 / 441 / 442 / 443 / 444 / 445 / 446 Hz, default 440. Changing it while a string sounds replays instantly at the new pitch.</span><span class="zh-t"><b>基准音（A4）</b>：432 / 434 / 436 / 438 / 439 / 440 / 441 / 442 / 443 / 444 / 445 / 446 Hz，默认 440。发声中切换基准音会立即以新音高重弹。</span></li>
+    <li><span class="en-t"><b>Headstock view</b>: one peg per string (low strings left, high right, like a real 3+3 headstock); peg faces show note name + string number; the sounding string glows cyan and pulses white; the info line shows e.g. <span class="mono">E2 · 82.4 Hz</span>.</span><span class="zh-t"><b>琴头视图</b>：一颗弦钮一根弦（低音在左、高音在右，如真实 3+3 琴头）；钮面标注音名+弦号；发声弦青色点亮并白光脉冲；底部信息行显示如 <span class="mono">E2 · 82.4 Hz</span>。</span></li>
+  </ul>
+  <h3><span class="en-t">All 18 tunings</span><span class="zh-t">全部 18 种调弦</span></h3>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Instrument</span><span class="zh-t">乐器</span></th><th><span class="en-t">Strings</span><span class="zh-t">弦数</span></th><th><span class="en-t">Tuning</span><span class="zh-t">调弦</span></th><th><span class="en-t">Notes (low → high)</span><span class="zh-t">音序（低 → 高）</span></th></tr>
+    <tr><td class="c1" rowspan="8"><span class="en-t">Guitar</span><span class="zh-t">吉他</span></td><td rowspan="8">6</td><td><span class="en-t">Standard</span><span class="zh-t">标准</span></td><td class="mono">E2 A2 D3 G3 B3 E4</td></tr>
+    <tr><td>Drop D</td><td class="mono">D2 A2 D3 G3 B3 E4</td></tr>
+    <tr><td><span class="en-t">Half step down</span><span class="zh-t">降半音</span></td><td class="mono">E♭2 A♭2 D♭3 G♭3 B♭3 E♭4</td></tr>
+    <tr><td><span class="en-t">Whole step down</span><span class="zh-t">降全音</span></td><td class="mono">D2 G2 C3 F3 A3 D4</td></tr>
+    <tr><td>Drop C</td><td class="mono">C2 G2 C3 F3 A3 D4</td></tr>
+    <tr><td>Open G</td><td class="mono">D2 G2 D3 G3 B3 D4</td></tr>
+    <tr><td>Open D</td><td class="mono">D2 A2 D3 F♯3 A3 D4</td></tr>
+    <tr><td>DADGAD</td><td class="mono">D2 A2 D3 G3 A3 D4</td></tr>
+    <tr><td class="c1" rowspan="2"><span class="en-t">Guitar</span><span class="zh-t">吉他</span></td><td rowspan="2">7</td><td><span class="en-t">Standard</span><span class="zh-t">标准</span></td><td class="mono">B1 E2 A2 D3 G3 B3 E4</td></tr>
+    <tr><td>Drop A</td><td class="mono">A1 E2 A2 D3 G3 B3 E4</td></tr>
+    <tr><td class="c1" rowspan="2"><span class="en-t">Guitar</span><span class="zh-t">吉他</span></td><td rowspan="2">8</td><td><span class="en-t">Standard</span><span class="zh-t">标准</span></td><td class="mono">F♯1 B1 E2 A2 D3 G3 B3 E4</td></tr>
+    <tr><td>Drop E</td><td class="mono">E1 B1 E2 A2 D3 G3 B3 E4</td></tr>
+    <tr><td class="c1" rowspan="3"><span class="en-t">Bass</span><span class="zh-t">贝斯</span></td><td rowspan="3">4</td><td><span class="en-t">Standard</span><span class="zh-t">标准</span></td><td class="mono">E1 A1 D2 G2</td></tr>
+    <tr><td>Drop D</td><td class="mono">D1 A1 D2 G2</td></tr>
+    <tr><td><span class="en-t">Half step down</span><span class="zh-t">降半音</span></td><td class="mono">E♭1 A♭1 D♭2 G♭2</td></tr>
+    <tr><td class="c1"><span class="en-t">Bass</span><span class="zh-t">贝斯</span></td><td>5</td><td><span class="en-t">Standard</span><span class="zh-t">标准</span></td><td class="mono">B0 E1 A1 D2 G2</td></tr>
+    <tr><td class="c1" rowspan="2"><span class="en-t">Ukulele</span><span class="zh-t">尤克里里</span></td><td rowspan="2">4</td><td><span class="en-t">Standard (high-G)</span><span class="zh-t">标准（高 G）</span></td><td class="mono">G4 C4 E4 A4</td></tr>
+    <tr><td>Low G</td><td class="mono">G3 C4 E4 A4</td></tr>
+  </table></div>
+  <div class="note">
+    <span class="en-t">As the app itself says: software tuning is never dead-on — trust your ears.</span>
+    <span class="zh-t">应用里的原话：软件调弦并不准确，请相信自己的耳朵。</span>
+  </div>
+</section>
+
+<section id="timer">
+  <h2><span class="en-t">12 · Practice timer &amp; stats</span><span class="zh-t">12 · 练琴计时与统计</span></h2>
+  <p>
+    <span class="en-t">The timer runs automatically while the app is open — nothing to press. The LED
+    pill at the left of the quick bar shows this session's time (H:MM); tap it for the stats
+    panel.</span>
+    <span class="zh-t">打开应用即自动计时，无需任何操作。快捷栏左端的 LED 药丸块显示本次练琴时长（H:MM），点开查看统计面板。</span>
+  </p>
+  <ul>
+    <li><span class="en-t"><b>Anti-idle</b>: after 1 hour with no activity (and nothing playing) a "Still practicing?" dialog appears; if unanswered for 5 minutes, the idle time is rolled back out of your log and the timer pauses. Any click or keypress resumes it.</span><span class="zh-t"><b>防挂机</b>：1 小时无操作（且未在播放）会弹出「还在练吗？」；5 分钟内未回应则回滚挂机时长并暂停计时，任何点击/按键自动恢复。</span></li>
+    <li><span class="en-t"><b>Stats panel</b>: This session · Today · This week · This month · Daily average (only days with ≥1 min count) · Streak (consecutive days with ≥1 min).</span><span class="zh-t"><b>统计面板</b>：本次练琴 · 今天 · 本周 · 本月 · 本月日均（仅计 ≥1 分钟的天）· 连续打卡（连续 ≥1 分钟的天数）。</span></li>
+    <li><span class="en-t"><b>Details page</b>: per-year view with Year total · Days practiced · Best day, plus a full-year daily-minutes curve; ◀ ▶ switches between years that have data.</span><span class="zh-t"><b>详细页</b>：按年查看——年累计 · 练琴天数 · 单日最长，附全年逐日分钟曲线；◀ ▶ 切换有数据的年份。</span></li>
+    <li><span class="en-t"><b>Your history is safe</b>: practice logs are stored per year, separately from settings — "Reset to defaults" never touches them.</span><span class="zh-t"><b>历史数据安全</b>：练琴日志按年独立存储，与设置无关——「恢复默认设置」不会清除。</span></li>
+  </ul>
+</section>
+
+<section id="shortcuts">
+  <h2><span class="en-t">13 · Keyboard shortcuts</span><span class="zh-t">13 · 键盘快捷键</span><span class="pill desktop">Desktop</span></h2>
+  <div class="tbl-wrap"><table>
+    <tr><th><span class="en-t">Key</span><span class="zh-t">按键</span></th><th><span class="en-t">Action</span><span class="zh-t">作用</span></th></tr>
+    <tr><td class="c1"><span class="kbd">Space</span></td><td><span class="en-t">Start / stop — drives the metronome on Fixed Tempo, starts/ends the run on Tempo Trainer, replays the selected string on Tuner.</span><span class="zh-t">开始 / 停止——固定速度页控制节拍器，训练页开始/结束训练，调弦页重播当前弦。</span></td></tr>
+    <tr><td class="c1"><span class="kbd">↑</span> / <span class="kbd">↓</span></td><td><span class="en-t">BPM +1 / −1 (Fixed Tempo tab only).</span><span class="zh-t">BPM +1 / −1（仅固定速度页）。</span></td></tr>
+    <tr><td class="c1"><span class="en-t">Mouse wheel</span><span class="zh-t">鼠标滚轮</span></td><td><span class="en-t">±1 BPM on the dial, and over the mini window.</span><span class="zh-t">表盘上 ±1 BPM，浮窗上同样有效。</span></td></tr>
+  </table></div>
+</section>
+
+<section id="desktop">
+  <h2><span class="en-t">14 · Desktop extras</span><span class="zh-t">14 · 桌面小工具</span><span class="pill desktop">Windows / macOS</span></h2>
+  <ul>
+    <li><span class="en-t"><b>Fixed window</b>: 640 × 780, centered, not resizable.</span><span class="zh-t"><b>固定窗口</b>：640 × 780，居中，不可缩放。</span></li>
+    <li><span class="en-t"><b>📌 Always on top</b>: keeps the window above everything; remembered across launches.</span><span class="zh-t"><b>📌 窗口置顶</b>：保持窗口最前，重启后记忆。</span></li>
+    <li><span class="en-t"><b>Mini window</b>: the picture-in-picture button collapses the app into a frameless 360 × 150 always-on-top widget showing today's practice time, play/stop, a glowing BPM number (mouse wheel = ±1), and large LED beat lamps. During training it adds a stage/remaining caption and a thin progress bar. Drag anywhere to move; ⤢ restores the full window.</span><span class="zh-t"><b>浮窗模式</b>：画中画按钮把应用收成 360 × 150 的无边框置顶挂件——今日练琴时长、播放/停止、发光 BPM 数字（滚轮 ±1）、大颗 LED 节拍灯；训练中另有档位/剩余提示和细进度条。任意位置拖动，⤢ 恢复完整窗口。</span></li>
+  </ul>
+  <p>
+    <span class="en-t">On mobile, the screen stays awake automatically while the metronome is playing.</span>
+    <span class="zh-t">移动端则在节拍器播放期间自动保持屏幕常亮。</span>
+  </p>
+</section>
+
+<section id="drawer">
+  <h2><span class="en-t">15 · Options drawer (☰)</span><span class="zh-t">15 · 选项抽屉（☰）</span></h2>
+  <p><span class="en-t">Top-right ☰, top to bottom:</span><span class="zh-t">右上角 ☰，自上而下：</span></p>
+  <ul>
+    <li><span class="en-t"><b>User guide</b> — the in-app version of this manual.</span><span class="zh-t"><b>使用说明</b>——本说明书的应用内版本。</span></li>
+    <li><span class="en-t"><b>Click sounds</b> — timbre pickers for the three voices, with instant preview.</span><span class="zh-t"><b>音效</b>——三个声部的音色选择，选择即试听。</span></li>
+    <li><span class="en-t"><b>Beat flash</b> + <b>Flash on downbeat only</b>.</span><span class="zh-t"><b>爆闪</b> + <b>仅重拍爆闪</b>。</span></li>
+    <li><span class="en-t"><b>Count-in</b> toggle.</span><span class="zh-t"><b>预备拍</b>开关。</span></li>
+    <li><span class="en-t"><b>Reset to defaults</b> — returns every setting to factory state (BPM 120, 4/4, quarter notes, swing off, default sounds and volumes, count-in on, flash off…) and clears presets and tuner selections. <b>Practice history is kept.</b> Disabled during a training run.</span><span class="zh-t"><b>恢复默认设置</b>——所有设置回到出厂状态（BPM 120、4/4、四分音符、Swing 关、默认音色音量、预备拍开、爆闪关……），并清空预设与调弦选择。<b>练琴历史保留。</b>训练进行中不可用。</span></li>
+    <li><span class="en-t"><b>Language</b> — Follow system, or pick one of 12: English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский · Italiano · Bahasa Indonesia. Switching is instant.</span><span class="zh-t"><b>语言</b>——跟随系统，或从 12 种中手选：English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский · Italiano · Bahasa Indonesia。切换即时生效。</span></li>
+  </ul>
+</section>
+
+<section id="data">
+  <h2><span class="en-t">16 · Saving, languages &amp; privacy</span><span class="zh-t">16 · 保存、语言与隐私</span></h2>
+  <ul>
+    <li><span class="en-t"><b>Everything auto-saves</b> — BPM, meter, subdivision, swing, accents, sounds, volumes, toggles and trainer parameters are saved as you change them and restored on next launch. No save button anywhere.</span><span class="zh-t"><b>一切自动保存</b>——BPM、拍号、细分、Swing、重音、音色、音量、各开关与训练参数改动即存，下次启动自动恢复。全应用没有保存按钮。</span></li>
+    <li><span class="en-t"><b>Zero data collection</b> — no analytics, no ads, no accounts, no network requests in normal use. Everything stays on your device. See the full <a href="privacy.html" style="color:var(--pink)">privacy policy</a>.</span><span class="zh-t"><b>零数据收集</b>——无统计、无广告、无账号，正常使用不发起任何网络请求，一切数据只在你的设备上。详见<a href="privacy.html" style="color:var(--pink)">隐私政策</a>。</span></li>
+  </ul>
+</section>
+
+<footer>
+  <span>© 2026 Elmer.H</span>
+  <a href="index.html"><span class="en-t">Home</span><span class="zh-t">主页</span></a>
+  <a href="index.html#apps"><span class="en-t">Download GuitarMetro</span><span class="zh-t">下载 GuitarMetro</span></a>
+  <a href="privacy.html"><span class="en-t">Privacy</span><span class="zh-t">隐私政策</span></a>
+</footer>
+
+</div>
+
+<script>
+  (function () {
+    if (localStorage.getItem('lang') === 'zh') document.body.classList.add('zh');
+  })();
+  function toggleLang() {
+    document.body.classList.toggle('zh');
+    localStorage.setItem('lang', document.body.classList.contains('zh') ? 'zh' : 'en');
+  }
+</script>
+</body>
+</html>
