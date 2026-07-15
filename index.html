@@ -122,21 +122,32 @@
     color: var(--faint); font-size: 12.5px;
   }
 
-  /* ---- WeChat entry + QR modal ---- */
-  .wechat-btn {
+  /* ---- Contact entries + QR modal ---- */
+  .hero-contacts {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .contact-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 18px; padding: 8px 16px;
-    background: rgba(63, 214, 165, 0.06);
-    border: 1px solid rgba(63, 214, 165, 0.32); border-radius: 999px;
-    color: var(--mint); cursor: pointer;
+    padding: 8px 16px; border-radius: 999px;
+    cursor: pointer; background: transparent;
     font-family: "JetBrains Mono", monospace; font-size: 12.5px; letter-spacing: 0.3px;
     transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   }
-  .wechat-btn:hover {
-    border-color: var(--mint); transform: translateY(-1px);
-    box-shadow: 0 0 18px rgba(63, 214, 165, 0.20);
+  .contact-btn svg { width: 17px; height: 17px; }
+  .contact-btn:hover { transform: translateY(-1px); }
+  .wechat-btn {
+    background: rgba(63, 214, 165, 0.06);
+    border: 1px solid rgba(63, 214, 165, 0.32); color: var(--mint);
   }
-  .wechat-btn svg { width: 17px; height: 17px; fill: var(--mint); }
+  .wechat-btn svg { fill: var(--mint); }
+  .wechat-btn:hover { border-color: var(--mint); box-shadow: 0 0 18px rgba(63, 214, 165, 0.20); }
+  .ig-btn {
+    background: rgba(244, 95, 192, 0.06);
+    border: 1px solid rgba(244, 95, 192, 0.32); color: var(--pink);
+  }
+  .ig-btn svg { stroke: var(--pink); fill: none; }
+  .ig-btn:hover { border-color: var(--pink); box-shadow: 0 0 18px rgba(244, 95, 192, 0.20); }
 
   .qr-overlay {
     position: fixed; inset: 0; z-index: 50;
@@ -428,18 +439,35 @@
       <span class="accent">&gt;</span> game &amp; technical artist <span class="accent">·</span> guitarist <span class="accent">·</span> indie maker
     </p>
     <p class="hero-note">one app at a time. crafted, not shipped.</p>
-    <button class="wechat-btn" onclick="openQR()" aria-label="Add me on WeChat">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3C5.36 3 2 5.79 2 9.24c0 1.94 1.06 3.67 2.72 4.82l-.68 2.05 2.4-1.2c.86.24 1.78.37 2.74.39-.13-.5-.2-1.02-.2-1.55 0-3.28 3.13-5.9 7.02-5.9.24 0 .48.01.71.03C15.83 4.86 12.96 3 9.5 3zM7.1 7.9a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zm4.9 0a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zM22 13.75c0-2.9-2.9-5.25-6.48-5.25S9.04 10.85 9.04 13.75 11.94 19 15.52 19c.74 0 1.46-.1 2.12-.3l1.94.98-.55-1.66c1.42-.96 2.97-2.5 2.97-4.27zm-8.6-.95a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6zm4.2 0a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
-      <span class="en-t">Add me on WeChat</span><span class="zh-t">加我的微信</span>
-    </button>
+    <div class="hero-contacts">
+      <button class="contact-btn wechat-btn" onclick="openQR('qrWeChat')" aria-label="Add me on WeChat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3C5.36 3 2 5.79 2 9.24c0 1.94 1.06 3.67 2.72 4.82l-.68 2.05 2.4-1.2c.86.24 1.78.37 2.74.39-.13-.5-.2-1.02-.2-1.55 0-3.28 3.13-5.9 7.02-5.9.24 0 .48.01.71.03C15.83 4.86 12.96 3 9.5 3zM7.1 7.9a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zm4.9 0a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zM22 13.75c0-2.9-2.9-5.25-6.48-5.25S9.04 10.85 9.04 13.75 11.94 19 15.52 19c.74 0 1.46-.1 2.12-.3l1.94.98-.55-1.66c1.42-.96 2.97-2.5 2.97-4.27zm-8.6-.95a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6zm4.2 0a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
+        <span class="en-t">Add me on WeChat</span><span class="zh-t">加我的微信</span>
+      </button>
+      <button class="contact-btn ig-btn" onclick="openQR('qrInsta')" aria-label="Follow me on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span class="en-t">Follow on Instagram</span><span class="zh-t">Instagram 关注我</span>
+      </button>
+    </div>
   </div>
 </div>
 
-<div class="qr-overlay" id="qrOverlay" onclick="qrBackdrop(event)">
+<div class="qr-overlay" id="qrWeChat" onclick="qrBackdrop(event)">
   <div class="qr-card">
     <button class="qr-close" onclick="closeQR()" aria-label="Close">&times;</button>
     <img src="assets/wechat-qr.png" alt="Elmer.H WeChat QR code">
     <div class="qr-cap"><span class="en-t">Scan with WeChat to add me</span><span class="zh-t">用微信扫码加我</span></div>
+  </div>
+</div>
+
+<div class="qr-overlay" id="qrInsta" onclick="qrBackdrop(event)">
+  <div class="qr-card">
+    <button class="qr-close" onclick="closeQR()" aria-label="Close">&times;</button>
+    <img src="assets/instagram-qr.png" alt="Elmer.Hou Instagram QR code">
+    <div class="qr-cap">
+      <span class="en-t">Scan to open <b style="color:var(--pink)">@Elmer.Hou</b> on Instagram</span>
+      <span class="zh-t">扫码打开 Instagram <b style="color:var(--pink)">@Elmer.Hou</b></span>
+    </div>
   </div>
 </div>
 
@@ -572,10 +600,13 @@
     localStorage.setItem('lang', document.body.classList.contains('zh') ? 'zh' : 'en');
   }
 
-  // WeChat QR modal
-  function openQR() { document.getElementById('qrOverlay').classList.add('open'); }
-  function closeQR() { document.getElementById('qrOverlay').classList.remove('open'); }
-  function qrBackdrop(e) { if (e.target === document.getElementById('qrOverlay')) closeQR(); }
+  // Contact QR modals (WeChat / Instagram)
+  function openQR(id) { document.getElementById(id).classList.add('open'); }
+  function closeQR() {
+    var o = document.querySelectorAll('.qr-overlay.open');
+    for (var i = 0; i < o.length; i++) o[i].classList.remove('open');
+  }
+  function qrBackdrop(e) { if (e.target.classList.contains('qr-overlay')) closeQR(); }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeQR(); });
 
   // Guestbook — Supabase-backed; posts appear immediately, owner moderates by
