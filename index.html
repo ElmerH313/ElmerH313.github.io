@@ -122,6 +122,55 @@
     color: var(--faint); font-size: 12.5px;
   }
 
+  /* ---- WeChat entry + QR modal ---- */
+  .wechat-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 18px; padding: 8px 16px;
+    background: rgba(63, 214, 165, 0.06);
+    border: 1px solid rgba(63, 214, 165, 0.32); border-radius: 999px;
+    color: var(--mint); cursor: pointer;
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px; letter-spacing: 0.3px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .wechat-btn:hover {
+    border-color: var(--mint); transform: translateY(-1px);
+    box-shadow: 0 0 18px rgba(63, 214, 165, 0.20);
+  }
+  .wechat-btn svg { width: 17px; height: 17px; fill: var(--mint); }
+
+  .qr-overlay {
+    position: fixed; inset: 0; z-index: 50;
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+    background: rgba(6, 8, 12, 0.78);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .qr-overlay.open { display: flex; }
+  .qr-card {
+    position: relative;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border: 1px solid rgba(63, 214, 165, 0.25); border-radius: 20px;
+    padding: 22px; max-width: 360px; width: 100%;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+    text-align: center;
+  }
+  .qr-card img {
+    width: 100%; display: block; border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  .qr-card .qr-cap {
+    margin-top: 14px; font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px; color: var(--muted); letter-spacing: 0.3px;
+  }
+  .qr-close {
+    position: absolute; top: -13px; right: -13px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--panel-2); border: 1px solid var(--line);
+    color: var(--muted); font-size: 17px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qr-close:hover { color: var(--pink); border-color: rgba(244, 95, 192, 0.5); }
+
   /* ---- Section labels ---- */
   section { padding: 46px 0; }
   .sec-title {
@@ -379,6 +428,18 @@
       <span class="accent">&gt;</span> game &amp; technical artist <span class="accent">·</span> guitarist <span class="accent">·</span> indie maker
     </p>
     <p class="hero-note">one app at a time. crafted, not shipped.</p>
+    <button class="wechat-btn" onclick="openQR()" aria-label="Add me on WeChat">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3C5.36 3 2 5.79 2 9.24c0 1.94 1.06 3.67 2.72 4.82l-.68 2.05 2.4-1.2c.86.24 1.78.37 2.74.39-.13-.5-.2-1.02-.2-1.55 0-3.28 3.13-5.9 7.02-5.9.24 0 .48.01.71.03C15.83 4.86 12.96 3 9.5 3zM7.1 7.9a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zm4.9 0a.95.95 0 1 1 0-1.9.95.95 0 0 1 0 1.9zM22 13.75c0-2.9-2.9-5.25-6.48-5.25S9.04 10.85 9.04 13.75 11.94 19 15.52 19c.74 0 1.46-.1 2.12-.3l1.94.98-.55-1.66c1.42-.96 2.97-2.5 2.97-4.27zm-8.6-.95a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6zm4.2 0a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
+      <span class="en-t">Add me on WeChat</span><span class="zh-t">加我的微信</span>
+    </button>
+  </div>
+</div>
+
+<div class="qr-overlay" id="qrOverlay" onclick="qrBackdrop(event)">
+  <div class="qr-card">
+    <button class="qr-close" onclick="closeQR()" aria-label="Close">&times;</button>
+    <img src="assets/wechat-qr.png" alt="Elmer.H WeChat QR code">
+    <div class="qr-cap"><span class="en-t">Scan with WeChat to add me</span><span class="zh-t">用微信扫码加我</span></div>
   </div>
 </div>
 
@@ -510,6 +571,12 @@
     document.body.classList.toggle('zh');
     localStorage.setItem('lang', document.body.classList.contains('zh') ? 'zh' : 'en');
   }
+
+  // WeChat QR modal
+  function openQR() { document.getElementById('qrOverlay').classList.add('open'); }
+  function closeQR() { document.getElementById('qrOverlay').classList.remove('open'); }
+  function qrBackdrop(e) { if (e.target === document.getElementById('qrOverlay')) closeQR(); }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeQR(); });
 
   // Guestbook — Supabase-backed; posts appear immediately, owner moderates by
   // hiding/deleting rows in the dashboard. Falls back to messages.json if offline.
