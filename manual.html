@@ -411,6 +411,7 @@
     <li><span class="en-t"><b>Progress ring dial</b>: the inner ring fills clockwise with overall session progress; the center shows start → target, the current BPM large, and the per-stage increment.</span><span class="zh-t"><b>进度环表盘</b>：内环顺时针填充整体训练进度；中心显示 起始 → 目标、当前速度大字和每档增幅。</span></li>
     <li><span class="en-t"><b>Stage line</b>: "Stage 3/12 · 2 left" plus a measure countdown like <span class="mono">5/32</span>; on the last measure of a stage the ring and countdown turn orange.</span><span class="zh-t"><b>档位行</b>：如「第 3/12 档 · 剩余 2」加小节倒计时 <span class="mono">5/32</span>；每档最后一小节整环与倒计时转橙。</span></li>
     <li><span class="en-t"><b>Locked during a run</b>: time signature, subdivision, presets and the plan itself. <b>Still adjustable</b>: master volume (instant), per-voice volumes and timbres (apply from the next measure).</span><span class="zh-t"><b>训练中锁定</b>：拍号、细分、预设与训练方案本身。<b>仍可调</b>：总音量（即时）、分声部音量与音色（下一小节头生效）。</span></li>
+    <li><span class="en-t"><b>When time is up</b> it doesn't stop by default: a completion note pops up (auto-dismisses in 5 s) and the metronome holds the final tempo until you stop it manually. Turn off <b>Keep clicking after finish</b> in ☰ to stop right on time instead.</span><span class="zh-t"><b>时间到默认不停拍</b>：弹出 5 秒自动消失的完成提示，节拍器保持最终速度直到手动停止；在 ☰ 里关闭「<b>练完继续响</b>」则到时即停。</span></li>
   </ul>
 </section>
 
@@ -487,7 +488,7 @@
     <span class="zh-t">打开应用即自动计时，无需任何操作。快捷栏左端的 LED 药丸块显示本次练琴时长（H:MM），点开查看统计面板。</span>
   </p>
   <ul>
-    <li><span class="en-t"><b>Anti-idle</b>: after 1 hour with no activity (and nothing playing) a "Still practicing?" dialog appears; if unanswered for 5 minutes, the idle time is rolled back out of your log and the timer pauses. Any click or keypress resumes it.</span><span class="zh-t"><b>防挂机</b>：1 小时无操作（且未在播放）会弹出「还在练吗？」；5 分钟内未回应则回滚挂机时长并暂停计时，任何点击/按键自动恢复。</span></li>
+    <li><span class="en-t"><b>Anti-idle</b>: after 88.8 minutes with no activity (and nothing playing) a "Still practicing?" dialog appears; if unanswered for 5 minutes, the idle time is rolled back out of your log and the timer pauses. Any click or keypress resumes it.</span><span class="zh-t"><b>防挂机</b>：88.8 分钟无操作（且未在播放）会弹出「还在练吗？」；5 分钟内未回应则回滚挂机时长并暂停计时，任何点击/按键自动恢复。</span></li>
     <li><span class="en-t"><b>Stats panel</b>: This session · Today · This week · This month · Daily average (only days with ≥1 min count) · Streak (consecutive days with ≥1 min).</span><span class="zh-t"><b>统计面板</b>：本次练琴 · 今天 · 本周 · 本月 · 本月日均（仅计 ≥1 分钟的天）· 连续打卡（连续 ≥1 分钟的天数）。</span></li>
     <li><span class="en-t"><b>Details page</b>: per-year view with Year total · Days practiced · Best day, plus a full-year daily-minutes curve; ◀ ▶ switches between years that have data.</span><span class="zh-t"><b>详细页</b>：按年查看——年累计 · 练琴天数 · 单日最长，附全年逐日分钟曲线；◀ ▶ 切换有数据的年份。</span></li>
     <li><span class="en-t"><b>Your history is safe</b>: practice logs are stored per year, separately from settings — "Reset to defaults" never touches them.</span><span class="zh-t"><b>历史数据安全</b>：练琴日志按年独立存储，与设置无关——「恢复默认设置」不会清除。</span></li>
@@ -525,6 +526,7 @@
     <li><span class="en-t"><b>Click sounds</b> — timbre pickers for the three voices, with instant preview.</span><span class="zh-t"><b>音效</b>——三个声部的音色选择，选择即试听。</span></li>
     <li><span class="en-t"><b>Beat flash</b> + <b>Flash on downbeat only</b>.</span><span class="zh-t"><b>爆闪</b> + <b>仅重拍爆闪</b>。</span></li>
     <li><span class="en-t"><b>Count-in</b> toggle.</span><span class="zh-t"><b>预备拍</b>开关。</span></li>
+    <li><span class="en-t"><b>Keep clicking after finish</b> toggle (Tempo Trainer, default on).</span><span class="zh-t"><b>练完继续响</b>开关（变速训练用，默认开）。</span></li>
     <li><span class="en-t"><b>Reset to defaults</b> — returns every setting to factory state (BPM 120, 4/4, quarter notes, swing off, default sounds and volumes, count-in on, flash off…) and clears presets and tuner selections. <b>Practice history is kept.</b> Disabled during a training run.</span><span class="zh-t"><b>恢复默认设置</b>——所有设置回到出厂状态（BPM 120、4/4、四分音符、Swing 关、默认音色音量、预备拍开、爆闪关……），并清空预设与调弦选择。<b>练琴历史保留。</b>训练进行中不可用。</span></li>
     <li><span class="en-t"><b>Language</b> — Follow system, or pick one of 12: English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский · Italiano · Bahasa Indonesia. Switching is instant.</span><span class="zh-t"><b>语言</b>——跟随系统，或从 12 种中手选：English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский · Italiano · Bahasa Indonesia。切换即时生效。</span></li>
   </ul>
