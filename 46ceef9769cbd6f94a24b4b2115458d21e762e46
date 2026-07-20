@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "46ceef9769cbd6f94a24b4b2115458d21e762e46",
+  "prompts": {
+    "15058a4f6d8fdecc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "894b109d-f611-46f6-a5ed-46ce95d91801",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ElmerHou",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 11,
+      "overriden_lines": 0
+    }
+  }
+}
