@@ -81,13 +81,13 @@ downloads/GuitarMetro-android.apk   （侧载版）
 
 - `≤820px`：App 卡片双栏 → 单栏
 - `≤600px`：导航收紧（适配到 320px）、Logo/标题缩小、截图改"大图通栏+两小图并排"、留言表单全宽、privacy 同步有一套
-- Hero 下方的 8-bit 贪食蛇只允许 `(min-width:900px) + hover:hover + pointer:fine` 的桌面设备显示；CSS 默认隐藏、JS 同条件拒绝初始化，移动端不占空间。控制：小键盘 8/2/4/6（兼容普通方向键），小键盘 0 开始/暂停/重开；最高分存 `localStorage.snakeBest`
+- Hero 下方使用 `assets/pixel-handheld.webp` 掌机外壳 + Canvas 屏幕运行 8-bit 贪食蛇。桌面：小键盘 8/2/4/6（兼容方向键）移动、Numpad 0 开关、R 重置；移动端：Power 后进入 Fullscreen API（不支持时用 fixed 全屏兜底），黑色 letterbox 补齐比例，点击图片上的十字键移动、Reset 重开。待机画面的 `ELMER.H` 在 Canvas 中轻微闪烁/上下 1px 动画；最高分存 `localStorage.snakeBest`
 - **教训**：CSS Grid 子项默认 `min-width:auto`，任何 nowrap 长内容（如长留言）会把卡片撑到 600px+，手机端整页缩小裁切。已用 `.app-card > * { min-width:0 }` 修复——新增网格/弹性布局时记得这条
 
 ## 文件结构
 
 ```
-index.html        主页（内联全部 CSS/JS：语言切换 + 留言板 + 桌面贪食蛇）
+index.html        主页（内联全部 CSS/JS：语言切换 + 留言板 + 掌机贪食蛇）
 privacy.html      GuitarMetro 隐私政策（商店上架 URL）
 CNAME             自定义域名 elmerh.com（GitHub 生成，勿删）
 downloads/        安装包直发目录（发版时更新）
@@ -95,6 +95,7 @@ assets/
   fonts/ fonts.css       自托管字体（latin woff2 ×7）
   logo.png               原始 Logo（蓝底，og:image 用）
   logo-mark.png          透明底抠图版（页面实际使用）
+  pixel-handheld.webp    交互式掌机外壳（屏幕和按键由 HTML/Canvas 覆盖）
   guitarmetro-icon.png   App 图标
   shot-dial/mini/tuner.png  应用截图（英文界面）
   messages.json          留言板离线兜底（Supabase 挂了才显示）
