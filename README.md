@@ -71,7 +71,7 @@ downloads/GuitarMetro-android.apk   （侧载版）
 
 **发新版流程**：
 1. App 仓库打包产物在 `A:\_Myself_\__GtMetronome__\dist\`（文件名规范见该仓库 `docs/06-发布渠道.md`）
-2. 覆盖拷贝到本仓库 `downloads/` → 更新 `index.html` 下载区版本号（搜 `v0.6.0`）→ commit + push
+2. 覆盖拷贝到本仓库 `downloads/` → 更新 `index.html` 下载区版本号与中英双语更新说明（搜 `Download · v`）→ commit + push
 3. （可选镜像）同步建 GitHub Release：tag `guitarmetro-vX.Y.Z`，API 上传同名资产；token 取法：`printf "protocol=https\nhost=github.com\n\n" | git credential fill`（password= 行）
 4. 实测三个 `https://elmerh.com/downloads/...` 链接 200 再收工
 
