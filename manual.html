@@ -192,7 +192,7 @@
   <img src="assets/guitarmetro-icon.png" alt="GuitarMetro icon">
   <div>
     <h1>GuitarMetro <span class="en-t">User Manual</span><span class="zh-t">使用说明书</span></h1>
-    <div class="sub"><span class="v">v1.0.0</span> · Windows / macOS / iOS / Android · <span class="en-t">12 languages</span><span class="zh-t">12 种语言</span></div>
+    <div class="sub"><span class="v">v1.0.7</span> · Windows / macOS / iOS / Android · <span class="en-t">12 languages</span><span class="zh-t">12 种语言</span></div>
   </div>
 </div>
 
@@ -223,19 +223,23 @@
   <p>
     <span class="en-t">GuitarMetro is a metronome built for serious practice: every click is rendered
     into the audio stream at exact sample positions and driven by your sound card's clock,
-    so the beat never drifts or jitters. The app has three tabs:</span>
+    so the beat never drifts or jitters. The app has two main tabs:</span>
     <span class="zh-t">GuitarMetro 是为认真练琴而做的节拍器：每一声 click 都以精确的采样点位置
-    直接合成进音频流、由声卡时钟驱动，节拍永不漂移、永不抖动。应用共三个页签：</span>
+    直接合成进音频流、由声卡时钟驱动，节拍永不漂移、永不抖动。应用有两个主页签：</span>
   </p>
   <ul>
-    <li><b>Tuner<span class="zh-t"> 调音</span></b> — <span class="en-t">reference-tone tuner for guitar / bass / ukulele.</span><span class="zh-t">吉他 / 贝斯 / 尤克里里参考音调弦。</span></li>
     <li><b>Fixed Tempo<span class="zh-t"> 固定速度</span></b> — <span class="en-t">the main metronome page (opens by default).</span><span class="zh-t">主节拍器页（启动默认页）。</span></li>
     <li><b>Tempo Trainer<span class="zh-t"> 变速训练</span></b> — <span class="en-t">automatic speed-ramping practice sessions.</span><span class="zh-t">自动爬速的变速训练。</span></li>
   </ul>
   <p>
-    <span class="en-t">Switching tabs always stops playback, so two pages can never sound at once.
+    <span class="en-t">The full-screen Tuner opens from the headstock button at the lower right.
+    The bottom bar stays fixed while the page content follows your swipe. Fixed Tempo stops and switches directly.
+    During an active Tempo Trainer session, switching first pauses it and asks for confirmation:
+    end and switch to reset the session, or stay to resume after a one-measure count-in.
     The in-app guide (☰ → User guide) covers the same ground as this page.</span>
-    <span class="zh-t">切换页签会自动停止播放，两页绝不会同时出声。应用内也有一份说明（☰ → 使用说明），内容与本页一致。</span>
+    <span class="zh-t">全屏调音器从右下角琴头按钮打开。页面内容跟手滑动时，底部快捷栏保持不动。
+    固定速度会直接停止并切换；变速训练进行中切页会先暂停并询问：
+    结束并切换会重置本次训练，选择留在训练则先数一小节预备拍再继续。应用内也有一份说明（☰ → 使用说明），内容与本页一致。</span>
   </p>
 </section>
 
@@ -263,6 +267,13 @@
     travels; downbeat segments stay lit in pale blue-white. During a count-in, or on the last
     measure of a trainer stage, the whole ring turns orange.</span>
     <span class="zh-t">外圈按拍数切分，当前拍的光斑流转经过，强拍段常亮淡蓝白。预备拍期间、以及变速训练每档的最后一小节，整环转为橙色。</span>
+  </p>
+  <p>
+    <span class="en-t">Fixed Tempo deliberately keeps a simple Play / Stop transport:
+    pressing the centered button while it is running stops the session. Pause / Resume is reserved
+    for Tempo Trainer, where progress and remaining time need to be preserved.</span>
+    <span class="zh-t">固定速度刻意保持最清晰的“播放 / 停止”逻辑：
+    播放中再次点击中央按钮即结束本次播放。暂停 / 继续仅用于需要保留进度与剩余时间的变速训练。</span>
   </p>
 </section>
 
@@ -377,8 +388,8 @@
 <section id="presets">
   <h2><span class="en-t">7 · Presets</span><span class="zh-t">7 · 预设</span></h2>
   <p>
-    <span class="en-t">5 slots per page, independent between the two metronome pages (quick bar → Presets):</span>
-    <span class="zh-t">每页 5 个槽位，两个节拍器页各自独立（快捷栏 → 预设）：</span>
+    <span class="en-t">The fixed bottom bar has one Presets button. It follows the selected tab and opens 5 independent slots for that page:</span>
+    <span class="zh-t">固定底栏只有一个预设按钮，会跟随当前页签打开该页面独立的 5 个槽位：</span>
   </p>
   <ul>
     <li><span class="en-t"><b>Fixed Tempo preset stores</b>: BPM, time signature, subdivision, swing on/off + ratio, per-beat accent map.</span><span class="zh-t"><b>固定速度预设保存</b>：BPM、拍号、细分、Swing 开关与比例、逐拍重音。</span></li>
@@ -411,6 +422,7 @@
     <li><span class="en-t"><b>Progress ring dial</b>: the inner ring fills clockwise with overall session progress; the center shows start → target, the current BPM large, and the per-stage increment.</span><span class="zh-t"><b>进度环表盘</b>：内环顺时针填充整体训练进度；中心显示 起始 → 目标、当前速度大字和每档增幅。</span></li>
     <li><span class="en-t"><b>Stage line</b>: "Stage 3/12 · 2 left" plus a measure countdown like <span class="mono">5/32</span>; on the last measure of a stage the ring and countdown turn orange.</span><span class="zh-t"><b>档位行</b>：如「第 3/12 档 · 剩余 2」加小节倒计时 <span class="mono">5/32</span>；每档最后一小节整环与倒计时转橙。</span></li>
     <li><span class="en-t"><b>Locked during a run</b>: time signature, subdivision, presets and the plan itself. <b>Still adjustable</b>: master volume (instant), per-voice volumes and timbres (apply from the next measure).</span><span class="zh-t"><b>训练中锁定</b>：拍号、细分、预设与训练方案本身。<b>仍可调</b>：总音量（即时）、分声部音量与音色（下一小节头生效）。</span></li>
+    <li><span class="en-t"><b>Pause / Resume</b>: the main button switches between Pause and Resume while preserving the current stage and remaining time; a smaller red Stop button appears to its right for ending and resetting the run. Resume always plays one preparation measure at the current tempo, then continues from a new measure.</span><span class="zh-t"><b>暂停 / 继续</b>：训练开始后主按钮在暂停与继续之间切换，保留当前档位与剩余时间；右侧会出现较小的红色停止键，用于结束并重置训练。继续时固定先以当前速度数一小节预备拍，再从新小节恢复。</span></li>
     <li><span class="en-t"><b>When time is up</b> it doesn't stop by default: a completion note pops up (auto-dismisses in 5 s) and the metronome holds the final tempo until you stop it manually. Turn off <b>Keep clicking after finish</b> in ☰ to stop right on time instead.</span><span class="zh-t"><b>时间到默认不停拍</b>：弹出 5 秒自动消失的完成提示，节拍器保持最终速度直到手动停止；在 ☰ 里关闭「<b>练完继续响</b>」则到时即停。</span></li>
   </ul>
 </section>
@@ -418,11 +430,12 @@
 <section id="countin">
   <h2><span class="en-t">9 · Count-in</span><span class="zh-t">9 · 预备拍</span></h2>
   <p>
-    <span class="en-t">Default <b>on</b> (☰ drawer → Count-in). Before playback starts — and before every
-    trainer speed change — the app counts one measure at the target tempo with a distinct low
+    <span class="en-t">Default <b>on</b> (☰ drawer → Count-in). Before playback starts, before every
+    trainer speed change, and before resuming from Pause, the app counts one measure at the target
+    or current tempo with a distinct low
     click. The big BPM number blinks once per beat and turns orange, and the beat ring turns
     orange, so you always know it's a count-in and not the real thing.</span>
-    <span class="zh-t">默认<b>开启</b>（☰ 抽屉 → 预备拍）。开始播放前——以及变速训练每次换速前——先以目标速度用独立的低音咔声数一小节。期间 BPM
+    <span class="zh-t">默认<b>开启</b>（☰ 抽屉 → 预备拍）。开始播放、变速训练换速、或从暂停继续前，会先以目标或当前速度用独立的低音咔声数一小节。期间 BPM
     大字随拍闪烁并变橙、节拍环整体转橙，一眼可辨是预备拍而非正式节拍。</span>
   </p>
 </section>
@@ -440,14 +453,14 @@
   <h2><span class="en-t">11 · Tuner</span><span class="zh-t">11 · 调弦</span></h2>
   <p>
     <span class="en-t">A reference-tone tuner (it plays notes for you to match by ear — it does not use the
-    microphone). Pick instrument → string count → tuning; tap a peg on the visual headstock to
+    microphone). Open it full-screen from the headstock button at the lower right, then pick instrument → string count → tuning; tap a peg on the visual headstock to
     hear that string, modeled with Karplus-Strong plucked-string synthesis per instrument. The
-    tone repeats every 3.5 seconds until you tap again (or press
-    <span class="kbd">Space</span> to replay). Selections persist across launches.</span>
-    <span class="zh-t">参考音式调弦（播放标准音让你用耳朵对齐——不使用麦克风拾音）。选乐器 → 弦数 → 调弦类型；在可视化琴头上点弦钮即听该弦参考音，音色按乐器用
-    Karplus-Strong 拨弦建模合成。参考音每 3.5 秒自动重复，再点一次停止（<span class="kbd">Space</span> 可重播）。所有选择自动记忆。</span>
+    tone repeats every 3.5 seconds until you tap again. Selections persist across launches.</span>
+    <span class="zh-t">参考音式调弦（播放标准音让你用耳朵对齐——不使用麦克风拾音）。从右下角琴头按钮全屏打开，然后选乐器 → 弦数 → 调弦类型；在可视化琴头上点弦钮即听该弦参考音，音色按乐器用
+    Karplus-Strong 拨弦建模合成。参考音每 3.5 秒自动重复，再点一次停止。所有选择自动记忆。</span>
   </p>
   <ul>
+    <li><span class="en-t"><b>Opening / closing</b>: opening the Tuner stops Fixed Tempo or pauses an active Trainer. Close with X to keep tuner selections; Esc closes and restores the selections from before opening. Metronome playback never resumes by itself after closing.</span><span class="zh-t"><b>打开 / 关闭</b>：打开调音器会停止固定速度，或暂停正在进行的变速训练。点 X 关闭会保留调音选择；按 Esc 关闭会恢复打开前的选择。关闭后节拍器不会自行恢复。</span></li>
     <li><span class="en-t"><b>Reference pitch (A4)</b>: 432 / 434 / 436 / 438 / 439 / 440 / 441 / 442 / 443 / 444 / 445 / 446 Hz, default 440. Changing it while a string sounds replays instantly at the new pitch.</span><span class="zh-t"><b>基准音（A4）</b>：432 / 434 / 436 / 438 / 439 / 440 / 441 / 442 / 443 / 444 / 445 / 446 Hz，默认 440。发声中切换基准音会立即以新音高重弹。</span></li>
     <li><span class="en-t"><b>Headstock view</b>: one peg per string (low strings left, high right, like a real 3+3 headstock); peg faces show note name + string number; the sounding string glows cyan and pulses white; the info line shows e.g. <span class="mono">E2 · 82.4 Hz</span>.</span><span class="zh-t"><b>琴头视图</b>：一颗弦钮一根弦（低音在左、高音在右，如真实 3+3 琴头）；钮面标注音名+弦号；发声弦青色点亮并白光脉冲；底部信息行显示如 <span class="mono">E2 · 82.4 Hz</span>。</span></li>
   </ul>
@@ -490,7 +503,7 @@
   <ul>
     <li><span class="en-t"><b>Anti-idle</b>: after 88.8 minutes with no activity (and nothing playing) a "Still practicing?" dialog appears; if unanswered for 5 minutes, the idle time is rolled back out of your log and the timer pauses. Any click or keypress resumes it.</span><span class="zh-t"><b>防挂机</b>：88.8 分钟无操作（且未在播放）会弹出「还在练吗？」；5 分钟内未回应则回滚挂机时长并暂停计时，任何点击/按键自动恢复。</span></li>
     <li><span class="en-t"><b>Stats panel</b>: This session · Today · This week · This month · Daily average (only days with ≥1 min count) · Streak (consecutive days with ≥1 min).</span><span class="zh-t"><b>统计面板</b>：本次练琴 · 今天 · 本周 · 本月 · 本月日均（仅计 ≥1 分钟的天）· 连续打卡（连续 ≥1 分钟的天数）。</span></li>
-    <li><span class="en-t"><b>Details page</b>: per-year view with Year total · Days practiced · Best day, plus a full-year daily-minutes curve; ◀ ▶ switches between years that have data.</span><span class="zh-t"><b>详细页</b>：按年查看——年累计 · 练琴天数 · 单日最长，附全年逐日分钟曲线；◀ ▶ 切换有数据的年份。</span></li>
+    <li><span class="en-t"><b>Details page</b>: switch between Year / Month / Week. All views show period total · days practiced · daily average (<span class="mono">M | H</span>). Year plots each natural week's daily average as points, Month plots each day, and Week marks its longest day with the exact duration. ◀ ▶ browses earlier periods; dates that have not happened yet are never included.</span><span class="zh-t"><b>详细页</b>：可切换年 / 月 / 周，三种视图都显示周期累计 · 练琴天数 · 每日平均（<span class="mono">M | H</span>）。年图按自然周的每日均值打点，月图按天显示，周图会标出最长一天及具体时长；◀ ▶ 浏览历史周期，尚未到达的日期永不计入统计。</span></li>
     <li><span class="en-t"><b>Your history is safe</b>: practice logs are stored per year, separately from settings — "Reset to defaults" never touches them.</span><span class="zh-t"><b>历史数据安全</b>：练琴日志按年独立存储，与设置无关——「恢复默认设置」不会清除。</span></li>
   </ul>
 </section>
@@ -499,7 +512,9 @@
   <h2><span class="en-t">13 · Keyboard shortcuts</span><span class="zh-t">13 · 键盘快捷键</span><span class="pill desktop">Desktop</span></h2>
   <div class="tbl-wrap"><table>
     <tr><th><span class="en-t">Key</span><span class="zh-t">按键</span></th><th><span class="en-t">Action</span><span class="zh-t">作用</span></th></tr>
-    <tr><td class="c1"><span class="kbd">Space</span></td><td><span class="en-t">Start / stop — drives the metronome on Fixed Tempo, starts/ends the run on Tempo Trainer, replays the selected string on Tuner.</span><span class="zh-t">开始 / 停止——固定速度页控制节拍器，训练页开始/结束训练，调弦页重播当前弦。</span></td></tr>
+    <tr><td class="c1"><span class="kbd">Space</span></td><td><span class="en-t">Fixed Tempo: Play / Stop. Tempo Trainer: Play / Pause / Resume.</span><span class="zh-t">固定速度：播放 / 停止；变速训练：播放 / 暂停 / 继续。</span></td></tr>
+    <tr><td class="c1"><span class="kbd">Esc</span></td><td><span class="en-t">On the main screen, Stop ends Fixed Tempo or Tempo Trainer. In dialogs, panels and auxiliary pages, Esc cancels edits, restores the values from before opening, and closes.</span><span class="zh-t">主界面中用于停止固定速度或变速训练；在弹窗、设置面板和辅助页面中，Esc 会取消修改、恢复打开前的数据并关闭。</span></td></tr>
+    <tr><td class="c1"><span class="kbd">Enter</span></td><td><span class="en-t">Where an OK or Confirm button is available, confirm, save and close.</span><span class="zh-t">存在 OK 或确认按钮时，用于确认、保存并关闭。</span></td></tr>
     <tr><td class="c1"><span class="kbd">↑</span> / <span class="kbd">↓</span></td><td><span class="en-t">BPM +1 / −1 (Fixed Tempo tab only).</span><span class="zh-t">BPM +1 / −1（仅固定速度页）。</span></td></tr>
     <tr><td class="c1"><span class="en-t">Mouse wheel</span><span class="zh-t">鼠标滚轮</span></td><td><span class="en-t">±1 BPM on the dial, and over the mini window.</span><span class="zh-t">表盘上 ±1 BPM，浮窗上同样有效。</span></td></tr>
   </table></div>
@@ -510,7 +525,7 @@
   <ul>
     <li><span class="en-t"><b>Fixed window</b>: 640 × 780, centered, not resizable.</span><span class="zh-t"><b>固定窗口</b>：640 × 780，居中，不可缩放。</span></li>
     <li><span class="en-t"><b>📌 Always on top</b>: keeps the window above everything; remembered across launches.</span><span class="zh-t"><b>📌 窗口置顶</b>：保持窗口最前，重启后记忆。</span></li>
-    <li><span class="en-t"><b>Mini window</b>: the picture-in-picture button collapses the app into a frameless 360 × 150 always-on-top widget showing today's practice time, play/stop, a glowing BPM number (mouse wheel = ±1), and large LED beat lamps. During training it adds a stage/remaining caption and a thin progress bar. Drag anywhere to move; ⤢ restores the full window.</span><span class="zh-t"><b>浮窗模式</b>：画中画按钮把应用收成 360 × 150 的无边框置顶挂件——今日练琴时长、播放/停止、发光 BPM 数字（滚轮 ±1）、大颗 LED 节拍灯；训练中另有档位/剩余提示和细进度条。任意位置拖动，⤢ 恢复完整窗口。</span></li>
+    <li><span class="en-t"><b>Mini window</b>: the picture-in-picture button shrinks the app <b>in place</b> into a frameless 360 × 150 always-on-top widget. Fixed Tempo shows Play / Stop; Tempo Trainer shows Play / Pause / Stop plus stage, remaining measures and a thin progress bar. Drag anywhere to move it; the mouse wheel adjusts Fixed Tempo by ±1 BPM; ⤢ restores the size and position from before entering mini mode.</span><span class="zh-t"><b>浮窗模式</b>：画中画按钮会在<b>原位置</b>把应用缩成 360 × 150 的无边框置顶挂件。固定速度显示播放 / 停止；变速训练显示播放 / 暂停 / 停止，并附档位、剩余小节和细进度条。任意位置可拖动，滚轮调节固定速度 ±1 BPM；点 ⤢ 恢复进入浮窗前的尺寸与坐标。</span></li>
   </ul>
   <p>
     <span class="en-t">On mobile, the screen stays awake automatically while the metronome is playing.</span>
@@ -527,7 +542,7 @@
     <li><span class="en-t"><b>Beat flash</b> + <b>Flash on downbeat only</b>.</span><span class="zh-t"><b>爆闪</b> + <b>仅重拍爆闪</b>。</span></li>
     <li><span class="en-t"><b>Count-in</b> toggle.</span><span class="zh-t"><b>预备拍</b>开关。</span></li>
     <li><span class="en-t"><b>Keep clicking after finish</b> toggle (Tempo Trainer, default on).</span><span class="zh-t"><b>练完继续响</b>开关（变速训练用，默认开）。</span></li>
-    <li><span class="en-t"><b>Reset to defaults</b> — returns every setting to factory state (BPM 120, 4/4, quarter notes, swing off, default sounds and volumes, count-in on, flash off…) and clears presets and tuner selections. <b>Practice history is kept.</b> Disabled during a training run.</span><span class="zh-t"><b>恢复默认设置</b>——所有设置回到出厂状态（BPM 120、4/4、四分音符、Swing 关、默认音色音量、预备拍开、爆闪关……），并清空预设与调弦选择。<b>练琴历史保留。</b>训练进行中不可用。</span></li>
+    <li><span class="en-t"><b>Reset to defaults</b> — returns metronome settings to factory state (BPM 120, 4/4, quarter notes, swing off, default sounds and volumes, count-in on, flash off…) and clears presets. <b>Practice history and tuner selections are kept.</b> Disabled during a training run.</span><span class="zh-t"><b>恢复默认设置</b>——节拍器设置回到出厂状态（BPM 120、4/4、四分音符、Swing 关、默认音色音量、预备拍开、爆闪关……），并清空预设。<b>练琴历史与调音选择保留。</b>训练进行中不可用。</span></li>
     <li><span class="en-t"><b>Language</b> — Follow system, or pick one of 12: English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский · Italiano · Bahasa Indonesia. Switching is instant.</span><span class="zh-t"><b>语言</b>——跟随系统，或从 12 种中手选：English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский · Italiano · Bahasa Indonesia。切换即时生效。</span></li>
   </ul>
 </section>
@@ -535,7 +550,7 @@
 <section id="data">
   <h2><span class="en-t">16 · Saving, languages &amp; privacy</span><span class="zh-t">16 · 保存、语言与隐私</span></h2>
   <ul>
-    <li><span class="en-t"><b>Everything auto-saves</b> — BPM, meter, subdivision, swing, accents, sounds, volumes, toggles and trainer parameters are saved as you change them and restored on next launch. No save button anywhere.</span><span class="zh-t"><b>一切自动保存</b>——BPM、拍号、细分、Swing、重音、音色、音量、各开关与训练参数改动即存，下次启动自动恢复。全应用没有保存按钮。</span></li>
+    <li><span class="en-t"><b>Automatic saving with safe cancel</b> — main-screen changes are saved automatically and restored on next launch. Editable panels preview changes live; OK / Enter (or normal close where no OK exists) commits them, while Esc restores the values from before the panel opened.</span><span class="zh-t"><b>自动保存与安全取消</b>——主界面修改会自动保存并在下次启动恢复；可编辑面板会实时预览，OK / Enter（无 OK 时正常关闭）提交，Esc 则恢复打开面板前的数据。</span></li>
     <li><span class="en-t"><b>Zero data collection</b> — no analytics, no ads, no accounts, no network requests in normal use. Everything stays on your device. See the full <a href="privacy.html" style="color:var(--pink)">privacy policy</a>.</span><span class="zh-t"><b>零数据收集</b>——无统计、无广告、无账号，正常使用不发起任何网络请求，一切数据只在你的设备上。详见<a href="privacy.html" style="color:var(--pink)">隐私政策</a>。</span></li>
   </ul>
 </section>
