@@ -59,9 +59,15 @@
 - UI：两行高滚动区，>2 条时每 3.2s 上滚一条循环（setTimeout 兜底，勿改回 transitionend——后台标签页不触发会卡住）
 - 展示条目是 `white-space:nowrap` 省略号单行——依赖 `.app-card > * { min-width:0 }` 防止撑破网格（重要教训，见下）
 
-## 安装包直发（⭐ 每次发版都要做）
+## 下载渠道（⭐ 每次发版都要核对）
 
-**主下载渠道**是本仓库 `downloads/` 目录（同域，国内外通用）：
+当前主页按平台分流：
+
+- **Windows**：只开放 Microsoft Store，正式地址为 `https://apps.microsoft.com/detail/9NDJ3519SQFN`；不再展示本地 ZIP
+- **Android**：保持完全免费，由本仓库 `downloads/GuitarMetro-android.apk` 同域直发
+- **iOS / macOS**：审核期间只显示不可点击的“App Store · 审核中”，不展示 TestFlight 或本地 macOS ZIP
+
+本仓库仍保留各平台安装包，方便归档与将来切换渠道：
 
 ```
 downloads/GuitarMetro-win64.zip      ← 文件名必须与 index.html 按钮 href 完全一致
@@ -71,9 +77,9 @@ downloads/GuitarMetro-android.apk   （侧载版）
 
 **发新版流程**：
 1. App 仓库打包产物在 `A:\_Myself_\__GtMetronome__\dist\`（文件名规范见该仓库 `docs/06-发布渠道.md`）
-2. 覆盖拷贝到本仓库 `downloads/` → 更新 `index.html` 下载区版本号与中英双语更新说明（搜 `Download · v`）→ commit + push
+2. 覆盖拷贝到本仓库 `downloads/` → 更新 `index.html` 下载区版本号与中英双语更新说明（搜 `Download · v`）；不要在 Windows Store 上线期间误恢复 Windows ZIP
 3. （可选镜像）同步建 GitHub Release：tag `guitarmetro-vX.Y.Z`，API 上传同名资产；token 取法：`printf "protocol=https\nhost=github.com\n\n" | git credential fill`（password= 行）
-4. 实测三个 `https://elmerh.com/downloads/...` 链接 200 再收工
+4. 实测 Microsoft Store 商品页与当前开放的同域下载链接；未开放平台确认按钮不可点击
 
 **限制**：单文件 <100MB（当前 APK 62MB 最大）；**禁用 Git LFS**（Pages 不解析 LFS，会发布成指针文本）；超限时迁移对象存储再议。
 
