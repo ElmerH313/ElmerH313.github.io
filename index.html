@@ -285,17 +285,30 @@
   .btn.soon::before { background: var(--faint); box-shadow: none; }
   .dl-note { margin-top: 14px; font-size: 12px; color: var(--faint); }
 
-  /* ---- Screenshots ---- */
-  .shots { display: flex; gap: 14px; align-items: flex-start; justify-content: center; }
-  .shot {
-    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
-    background: #10131a;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  }
-  .shot.main { width: 60%; }
-  .shot-col { width: 40%; display: flex; flex-direction: column; gap: 14px; }
-  .shot img { width: 100%; display: block; margin-top: -4.3%; }
-  .shot.wide img { margin-top: 0; }
+  /* ---- Screenshot showcase ---- */
+  .app-copy { grid-column: 1 / -1; max-width: 860px; }
+  .showcase { grid-column: 1 / -1; min-width: 0; margin-top: 4px; }
+  .showcase-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 14px; }
+  .showcase-title { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); }
+  .showcase-hint { margin-top: 4px; color: var(--faint); font-size: 11.5px; }
+  .showcase-count { flex: none; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1px; color: var(--faint); }
+  .showcase-shell { position: relative; }
+  .showcase-track { display: grid; grid-auto-flow: column; grid-auto-columns: min(82%, 860px); gap: 18px; overflow-x: auto; padding: 2px 9% 18px 0; scroll-snap-type: x mandatory; scroll-padding-inline: 0; scrollbar-width: none; overscroll-behavior-inline: contain; cursor: grab; touch-action: pan-x pan-y; }
+  .showcase-track::-webkit-scrollbar { display: none; }
+  .showcase-track.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  .showcase-slide { scroll-snap-align: start; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #0d1016; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.42); }
+  .showcase-slide img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; pointer-events: none; user-select: none; }
+  .showcase-arrow { position: absolute; z-index: 2; top: 50%; width: 44px; height: 44px; transform: translateY(-70%); border: 1px solid rgba(255,255,255,.18); border-radius: 50%; background: rgba(8, 10, 15, .82); color: var(--text); font-size: 22px; line-height: 1; cursor: pointer; backdrop-filter: blur(8px); transition: border-color .15s ease, background .15s ease, opacity .15s ease; }
+  .showcase-arrow:hover { border-color: var(--cyan); background: rgba(15, 18, 24, .96); }
+  .showcase-arrow:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+  .showcase-arrow.prev { left: 12px; }
+  .showcase-arrow.next { right: 12px; }
+  .showcase-arrow:disabled { opacity: .28; cursor: default; }
+  .showcase-dots { display: flex; justify-content: center; gap: 7px; margin-top: 2px; }
+  .showcase-dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.18); cursor: pointer; transition: transform .15s ease, background .15s ease; }
+  .showcase-dot.active { transform: scale(1.35); background: var(--cyan); }
+  .showcase-dot:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .showcase-track { scroll-behavior: auto !important; } .showcase-dot { transition: none; } }
 
   /* ---- Coming ---- */
   .coming {
@@ -404,10 +417,13 @@
     .app-card { padding: 20px 16px; gap: 26px; }
     .app-head img { width: 54px; height: 54px; border-radius: 13px; }
     .app-head h2 { font-size: 19px; }
-    .shots { flex-wrap: wrap; }
-    .shot.main { width: 100%; }
-    .shot-col { width: 100%; flex-direction: row; gap: 12px; }
-    .shot-col .shot { flex: 1; min-width: 0; }
+    .showcase-head { align-items: start; }
+    .showcase-hint { max-width: 220px; }
+    .showcase-track { grid-auto-columns: 90%; gap: 12px; padding-right: 8%; }
+    .showcase-slide { border-radius: 10px; }
+    .showcase-arrow { width: 42px; height: 42px; font-size: 20px; }
+    .showcase-arrow.prev { left: 6px; }
+    .showcase-arrow.next { right: 6px; }
     .guestbook { padding: 14px 14px 12px; }
     .gb-form input { width: 100%; }
     .gb-form textarea { min-width: 0; width: 100%; }
@@ -476,7 +492,7 @@
     <div class="sec-title"><span class="en-t">// Apps</span><span class="zh-t">// 应用</span></div>
 
     <div class="app-card">
-      <div>
+      <div class="app-copy">
         <div class="app-head">
           <img src="assets/guitarmetro-icon.png" alt="GuitarMetro icon">
           <div>
@@ -533,12 +549,28 @@
         </p>
       </div>
 
-      <div class="shots">
-        <div class="shot main"><img src="assets/shot-dial.png" alt="GuitarMetro dial"></div>
-        <div class="shot-col">
-          <div class="shot wide"><img src="assets/shot-mini.png" alt="Mini floating window"></div>
-          <div class="shot"><img src="assets/shot-tuner.png" alt="Tuner"></div>
+      <div class="showcase" aria-label="GuitarMetro macOS screenshots">
+        <div class="showcase-head">
+          <div>
+            <div class="showcase-title"><span class="en-t">GuitarMetro on macOS</span><span class="zh-t">GuitarMetro macOS 界面</span></div>
+            <div class="showcase-hint"><span class="en-t">Drag, swipe, or use the arrows to explore</span><span class="zh-t">拖动、滑动或点击箭头浏览</span></div>
+          </div>
+          <div class="showcase-count"><span id="showcaseCurrent">01</span> / 07</div>
         </div>
+        <div class="showcase-shell">
+          <button class="showcase-arrow prev" id="showcasePrev" type="button" aria-label="Previous screenshot">‹</button>
+          <div class="showcase-track" id="showcaseTrack" tabindex="0" aria-label="Screenshot gallery">
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/01.png" alt="GuitarMetro macOS screenshot 1" loading="eager"></figure>
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/02.png" alt="GuitarMetro macOS screenshot 2" loading="lazy"></figure>
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/03.png" alt="GuitarMetro macOS screenshot 3" loading="lazy"></figure>
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/04.png" alt="GuitarMetro macOS screenshot 4" loading="lazy"></figure>
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/05.png" alt="GuitarMetro macOS screenshot 5" loading="lazy"></figure>
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/06.png" alt="GuitarMetro macOS screenshot 6" loading="lazy"></figure>
+            <figure class="showcase-slide"><img src="assets/screenshots/macos/07.png" alt="GuitarMetro macOS screenshot 7" loading="lazy"></figure>
+          </div>
+          <button class="showcase-arrow next" id="showcaseNext" type="button" aria-label="Next screenshot">›</button>
+        </div>
+        <div class="showcase-dots" id="showcaseDots" aria-label="Choose screenshot"></div>
       </div>
 
       <div class="guestbook">
@@ -611,6 +643,44 @@
   function qrBackdrop(e) { if (e.target.classList.contains('qr-overlay')) closeQR(); }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeQR(); });
 
+
+
+  // Screenshot showcase — native swipe/scroll with pointer drag, arrows and dots.
+  (function () {
+    var track = document.getElementById('showcaseTrack');
+    if (!track) return;
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.showcase-slide'));
+    var prev = document.getElementById('showcasePrev');
+    var next = document.getElementById('showcaseNext');
+    var dots = document.getElementById('showcaseDots');
+    var current = document.getElementById('showcaseCurrent');
+    var active = 0, dragging = false, startX = 0, startScroll = 0, moved = false;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    slides.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button'; dot.className = 'showcase-dot'; dot.setAttribute('aria-label', 'Show screenshot ' + (i + 1));
+      dot.addEventListener('click', function () { go(i); }); dots.appendChild(dot);
+    });
+    function nearest() {
+      var left = track.scrollLeft, best = 0, distance = Infinity;
+      slides.forEach(function (slide, i) { var d = Math.abs(slide.offsetLeft - track.offsetLeft - left); if (d < distance) { distance = d; best = i; } });
+      return best;
+    }
+    function update(i) {
+      active = Math.max(0, Math.min(slides.length - 1, i)); current.textContent = String(active + 1).padStart(2, '0');
+      prev.disabled = active === 0; next.disabled = active === slides.length - 1;
+      Array.prototype.forEach.call(dots.children, function (dot, n) { dot.classList.toggle('active', n === active); dot.setAttribute('aria-current', n === active ? 'true' : 'false'); });
+    }
+    function go(i) { i = Math.max(0, Math.min(slides.length - 1, i)); track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' }); update(i); }
+    prev.addEventListener('click', function () { go(active - 1); }); next.addEventListener('click', function () { go(active + 1); });
+    track.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); } if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); } });
+    track.addEventListener('scroll', function () { clearTimeout(track._showcaseTimer); track._showcaseTimer = setTimeout(function () { update(nearest()); }, 90); }, { passive: true });
+    track.addEventListener('pointerdown', function (e) { if (e.pointerType === 'touch') return; dragging = true; moved = false; startX = e.clientX; startScroll = track.scrollLeft; track.classList.add('dragging'); track.setPointerCapture(e.pointerId); });
+    track.addEventListener('pointermove', function (e) { if (!dragging) return; var dx = e.clientX - startX; if (Math.abs(dx) > 4) moved = true; track.scrollLeft = startScroll - dx; });
+    function endDrag(e) { if (!dragging) return; dragging = false; track.classList.remove('dragging'); if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId); go(nearest()); }
+    track.addEventListener('pointerup', endDrag); track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('click', function (e) { if (moved) e.preventDefault(); }); window.addEventListener('resize', function () { go(active); }); update(0);
+  })();
 
   // Guestbook — Supabase-backed; posts appear immediately, owner moderates by
   // hiding/deleting rows in the dashboard. Falls back to messages.json if offline.

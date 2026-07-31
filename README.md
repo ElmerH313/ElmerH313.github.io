@@ -86,7 +86,7 @@ downloads/GuitarMetro-android.apk   （侧载版）
 ## 响应式（两个断点 + 一个血泪教训）
 
 - `≤820px`：App 卡片双栏 → 单栏
-- `≤600px`：导航收紧（适配到 320px）、Logo/标题缩小、截图改"大图通栏+两小图并排"、留言表单全宽、privacy 同步有一套
+- `≤600px`：导航收紧（适配到 320px）、Logo/标题缩小、截图轮播单张占轨道 90%、留言表单全宽、privacy 同步有一套
 - **教训**：CSS Grid 子项默认 `min-width:auto`，任何 nowrap 长内容（如长留言）会把卡片撑到 600px+，手机端整页缩小裁切。已用 `.app-card > * { min-width:0 }` 修复——新增网格/弹性布局时记得这条
 
 ## 文件结构
@@ -101,7 +101,7 @@ assets/
   logo.png               原始 Logo（蓝底，og:image 用）
   logo-mark.png          透明底抠图版（页面实际使用）
   guitarmetro-icon.png   App 图标
-  shot-dial/mini/tuner.png  应用截图（英文界面）
+  screenshots/macos/01–07.png  macOS 展示图（1440×900）；主页轮播支持拖拽、触摸滑动、箭头、键盘与圆点切换
   messages.json          留言板离线兜底（Supabase 挂了才显示）
   favicon.svg            已弃用，可删
 .claude/launch.json      本地预览配置（python http.server 8642）——已 gitignore
