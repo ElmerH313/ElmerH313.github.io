@@ -65,7 +65,7 @@
 
 - **Windows**：只开放 Microsoft Store，正式地址为 `https://apps.microsoft.com/detail/9NDJ3519SQFN`；不再展示本地 ZIP
 - **Android**：保持完全免费，由本仓库 `downloads/GuitarMetro-android.apk` 同域直发
-- **iOS / macOS**：审核期间只显示不可点击的“App Store · 审核中”，不展示 TestFlight 或本地 macOS ZIP
+- **iOS / iPadOS / macOS**：均已上线 App Store，iOS 与 macOS 按钮共用正式地址 `https://apps.apple.com/cn/app/id6788628904`
 
 本仓库仍保留各平台安装包，方便归档与将来切换渠道：
 
@@ -79,7 +79,7 @@ downloads/GuitarMetro-android.apk   （侧载版）
 1. App 仓库打包产物在 `A:\_Myself_\__GtMetronome__\dist\`（文件名规范见该仓库 `docs/06-发布渠道.md`）
 2. 覆盖拷贝到本仓库 `downloads/` → 更新 `index.html` 下载区版本号与中英双语更新说明（搜 `Download · v`）；不要在 Windows Store 上线期间误恢复 Windows ZIP
 3. （可选镜像）同步建 GitHub Release：tag `guitarmetro-vX.Y.Z`，API 上传同名资产；token 取法：`printf "protocol=https\nhost=github.com\n\n" | git credential fill`（password= 行）
-4. 实测 Microsoft Store 商品页与当前开放的同域下载链接；未开放平台确认按钮不可点击
+4. 实测 Microsoft Store、App Store 商品页与当前开放的同域下载链接
 
 **限制**：单文件 <100MB（当前 APK 62MB 最大）；**禁用 Git LFS**（Pages 不解析 LFS，会发布成指针文本）；超限时迁移对象存储再议。
 
