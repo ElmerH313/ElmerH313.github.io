@@ -6,9 +6,16 @@
 
 ## 项目定位
 
-- **个人账号为主**的主页，不是单一 App 的落地页；Apps 区当前只有 GuitarMetro，预留"更多工具打磨中"占位卡
+- **个人账号为主**的主页，不是单一 App 的落地页；Apps 区提供 GuitarMetro 与独立 Web 应用的统一入口
 - 承担 **GuitarMetro 各商店上架所需的隐私政策 URL**：`https://elmerh.com/privacy.html`（英文为主、中文可切换、零收集声明）
 - 纯静态、零构建；**唯一运行时外部依赖是 Supabase（留言板）**，其余资源（含字体）全部同域自托管
+
+## Web 应用仓库边界（长期规则）
+
+- 本仓库只负责 `elmerh.com` 总入口，不承载其他 Web 应用的源码或构建产物。
+- 每个 Web 应用使用独立仓库，并发布到 `https://elmerh.com/<slug>/`。
+- 主页只保存对应的入口图标、文字和链接；禁止把应用构建目录复制到本仓库。
+- Fingerboard Pro 独立仓库：`github.com/ElmerH313/fingerboard`，正式入口：`https://elmerh.com/fingerboard/`。
 
 ## 部署与域名（已全部生效）
 
