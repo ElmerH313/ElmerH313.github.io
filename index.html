@@ -498,14 +498,11 @@
     (function () {
       var button = document.getElementById('languageButton');
       var language = /^zh(?:-|$)/i.test(navigator.language || '') ? 'zh-CN' : 'en';
-      var hasSavedLanguage = false;
-      var hasManualSelection = false;
 
       try {
         var savedLanguage = localStorage.getItem('lang');
         if (savedLanguage === 'zh' || savedLanguage === 'en') {
           language = savedLanguage === 'zh' ? 'zh-CN' : 'en';
-          hasSavedLanguage = true;
         }
       } catch (_) {
         // Continue with automatic language detection when storage is unavailable.
@@ -520,36 +517,7 @@
 
       applyLanguage(language);
 
-      if (!hasSavedLanguage) {
-        var controller = typeof AbortController === 'function' ? new AbortController() : null;
-        var timeout = window.setTimeout(function () {
-          if (controller) controller.abort();
-        }, 1800);
-
-        fetch('https://api.country.is/', {
-          cache: 'no-store',
-          signal: controller ? controller.signal : undefined
-        })
-          .then(function (response) {
-            if (!response.ok) throw new Error('Country lookup failed');
-            return response.json();
-          })
-          .then(function (result) {
-            if (!hasManualSelection) {
-              var usesChinese = ['CN', 'HK', 'MO', 'TW'].indexOf(result.country) !== -1;
-              applyLanguage(usesChinese ? 'zh-CN' : 'en');
-            }
-          })
-          .catch(function () {
-            // Keep the browser-language fallback when IP detection is unavailable.
-          })
-          .finally(function () {
-            window.clearTimeout(timeout);
-          });
-      }
-
       button.addEventListener('click', function () {
-        hasManualSelection = true;
         var nextLanguage = document.documentElement.lang === 'zh-CN' ? 'en' : 'zh-CN';
         applyLanguage(nextLanguage);
         try {
