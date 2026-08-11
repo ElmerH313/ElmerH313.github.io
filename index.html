@@ -112,6 +112,7 @@
       height: 42px;
       display: block;
       flex: 0 0 auto;
+      border-radius: 12px;
       object-fit: contain;
     }
 
@@ -447,8 +448,8 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
           <p class="card-copy">
-            <span class="en-t">A precise, distraction-free metronome built for everyday music practice.</span>
-            <span class="zh-t">为日常音乐练习打造的精准、专注型节拍器。</span>
+            <span class="en-t">A cross-platform practice metronome with progressive tempo training, reference tuning and practice statistics.</span>
+            <span class="zh-t">跨平台练习节拍器，集渐进变速训练、参考调弦与练琴统计于一体。</span>
           </p>
           <div class="card-footer">
             <div class="platforms" aria-label="Supported platforms">
@@ -469,8 +470,8 @@
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
           <p class="card-copy">
-            <span class="en-t">An interactive guitar fingerboard for exploring notes, intervals and scales.</span>
-            <span class="zh-t">用于探索音名、音程与音阶的交互式吉他指板。</span>
+            <span class="en-t">An interactive fretboard reference for visualizing scales, intervals, characteristic tones and chord relationships.</span>
+            <span class="zh-t">在整条吉他指板上查看音阶、音程、特征音与和弦关系的交互式参考工具。</span>
           </p>
           <div class="card-footer">
             <div class="platforms" aria-label="Supported platforms">
@@ -496,12 +497,18 @@
   <script>
     (function () {
       var button = document.getElementById('languageButton');
-      var language = 'en';
+      var language = /^zh(?:-|$)/i.test(navigator.language || '') ? 'zh-CN' : 'en';
+      var hasSavedLanguage = false;
+      var hasManualSelection = false;
 
       try {
-        if (localStorage.getItem('lang') === 'zh') language = 'zh-CN';
+        var savedLanguage = localStorage.getItem('lang');
+        if (savedLanguage === 'zh' || savedLanguage === 'en') {
+          language = savedLanguage === 'zh' ? 'zh-CN' : 'en';
+          hasSavedLanguage = true;
+        }
       } catch (_) {
-        language = 'en';
+        // Continue with automatic language detection when storage is unavailable.
       }
 
       function applyLanguage(nextLanguage) {
@@ -513,7 +520,36 @@
 
       applyLanguage(language);
 
+      if (!hasSavedLanguage) {
+        var controller = typeof AbortController === 'function' ? new AbortController() : null;
+        var timeout = window.setTimeout(function () {
+          if (controller) controller.abort();
+        }, 1800);
+
+        fetch('https://api.country.is/', {
+          cache: 'no-store',
+          signal: controller ? controller.signal : undefined
+        })
+          .then(function (response) {
+            if (!response.ok) throw new Error('Country lookup failed');
+            return response.json();
+          })
+          .then(function (result) {
+            if (!hasManualSelection) {
+              var usesChinese = ['CN', 'HK', 'MO', 'TW'].indexOf(result.country) !== -1;
+              applyLanguage(usesChinese ? 'zh-CN' : 'en');
+            }
+          })
+          .catch(function () {
+            // Keep the browser-language fallback when IP detection is unavailable.
+          })
+          .finally(function () {
+            window.clearTimeout(timeout);
+          });
+      }
+
       button.addEventListener('click', function () {
+        hasManualSelection = true;
         var nextLanguage = document.documentElement.lang === 'zh-CN' ? 'en' : 'zh-CN';
         applyLanguage(nextLanguage);
         try {
