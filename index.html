@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Elmer.H — Apps &amp; Web Tools</title>
-  <meta name="description" content="Independent apps and web tools from Elmer.H. Open GuitarMetro and Fingerboard Pro.">
+  <meta name="description" content="Independent apps and web tools by Elmer.H: GuitarMetro and Fingerboard Pro.">
   <meta name="theme-color" content="#090c12">
   <meta property="og:title" content="Elmer.H — Apps &amp; Web Tools">
-  <meta property="og:description" content="A focused collection of independent apps and web tools.">
+  <meta property="og:description" content="Independent apps and web tools by Elmer.H.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://elmerh.com/">
   <meta property="og:image" content="https://elmerh.com/assets/logo.png">
@@ -17,40 +17,32 @@
   <style>
     :root {
       color-scheme: dark;
-      --color-background: #090c12;
-      --color-surface: #111620;
-      --color-surface-raised: #171d29;
-      --color-text: #f4f6fb;
-      --color-text-secondary: #aab3c5;
-      --color-text-tertiary: #7e899e;
-      --color-outline: rgba(255, 255, 255, 0.12);
-      --color-outline-strong: rgba(255, 255, 255, 0.22);
-      --color-interactive: #6ed8ff;
-      --color-focus: #f6b8e2;
-      --color-brand: #f266c6;
-      --color-guitarmetro: #f266c6;
-      --color-fingerboard: #4ee0ae;
-      --shadow-card: 0 24px 70px rgba(0, 0, 0, 0.34);
-      --font-display: "Unbounded", "Segoe UI Variable", sans-serif;
-      --font-body: "Space Grotesk", "Segoe UI Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
-      --font-label: "JetBrains Mono", "Cascadia Code", monospace;
+      --background: #090c12;
+      --surface: #10151d;
+      --text: #f3f5fa;
+      --text-secondary: #aab3c1;
+      --text-tertiary: #788394;
+      --outline: rgba(255, 255, 255, 0.13);
+      --outline-strong: rgba(255, 255, 255, 0.25);
+      --focus: #f6b8e2;
+      --brand: #f266c6;
+      --guitarmetro: #f266c6;
+      --fingerboard: #68dea9;
+      --display: "Unbounded", "Segoe UI Variable", sans-serif;
+      --body: "Space Grotesk", "Segoe UI Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --label: "JetBrains Mono", "Cascadia Code", monospace;
     }
 
     * { box-sizing: border-box; }
-    html { min-width: 240px; background: var(--color-background); }
+    html { min-width: 240px; background: var(--background); }
 
     body {
       min-height: 100vh;
       min-height: 100svh;
       margin: 0;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      color: var(--color-text);
-      background:
-        radial-gradient(900px 540px at 12% -10%, rgba(157, 123, 255, 0.15), transparent 64%),
-        radial-gradient(780px 480px at 92% 4%, rgba(242, 102, 198, 0.11), transparent 60%),
-        var(--color-background);
-      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--background);
+      font-family: var(--body);
       font-size: 1rem;
       line-height: 1.55;
       overflow-x: hidden;
@@ -58,15 +50,25 @@
 
     a, button { -webkit-tap-highlight-color: transparent; }
 
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .shell {
+      width: min(1080px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
     .skip-link {
       position: fixed;
       top: 12px;
       left: 12px;
-      z-index: 20;
+      z-index: 30;
       padding: 10px 14px;
       border-radius: 8px;
-      color: var(--color-background);
-      background: var(--color-focus);
+      color: var(--background);
+      background: var(--focus);
       font-weight: 700;
       text-decoration: none;
       transform: translateY(-160%);
@@ -74,16 +76,14 @@
 
     .skip-link:focus { transform: translateY(0); }
 
-    .shell {
-      width: min(1120px, calc(100% - 48px));
-      margin-inline: auto;
-    }
-
     header {
-      border-bottom: 1px solid var(--color-outline);
-      background: rgba(9, 12, 18, 0.76);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--outline);
+      background: rgba(9, 12, 18, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .nav {
@@ -94,260 +94,179 @@
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--color-text);
-      font-family: var(--font-display);
+      color: var(--text);
+      font-family: var(--display);
       font-size: 0.94rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-decoration: none;
-      text-transform: uppercase;
     }
 
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      display: block;
-      flex: 0 0 auto;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-
-    .brand-dot { color: var(--color-brand); }
-
-    .hub-label {
-      padding-left: 18px;
-      border-left: 1px solid var(--color-outline);
-      color: var(--color-text-tertiary);
-      font-family: var(--font-label);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
+    .brand-dot { color: var(--brand); }
     .nav-spacer { flex: 1; }
 
     .lang-button {
       min-width: 70px;
       min-height: 44px;
       padding: 8px 14px;
-      border: 1px solid var(--color-outline);
+      border: 1px solid var(--outline);
       border-radius: 10px;
-      color: var(--color-text-secondary);
-      background: rgba(255, 255, 255, 0.025);
-      font-family: var(--font-label);
+      color: var(--text-secondary);
+      background: transparent;
+      font-family: var(--label);
       font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
       cursor: pointer;
       transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
     }
 
     .lang-button:hover {
-      color: var(--color-text);
-      border-color: var(--color-outline-strong);
-      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      border-color: var(--outline-strong);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    :focus-visible {
-      outline: 3px solid var(--color-focus);
-      outline-offset: 4px;
-    }
+    main { padding-block: clamp(54px, 8vw, 96px); }
 
-    main {
-      display: flex;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(190px, 250px) minmax(0, 1fr);
       align-items: center;
-      padding-block: clamp(56px, 10vw, 116px);
+      gap: clamp(42px, 7vw, 88px);
+      padding-bottom: clamp(58px, 8vw, 92px);
     }
 
-    .intro { max-width: 760px; }
-
-    .eyebrow {
-      margin: 0 0 16px;
-      color: var(--color-interactive);
-      font-family: var(--font-label);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+    .hero-logo {
+      width: 100%;
+      display: block;
+      border-radius: 28px;
     }
 
     h1 {
-      max-width: 720px;
       margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5.2vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 1.14;
+      font-family: var(--display);
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
     }
 
-    .intro-copy {
-      max-width: 620px;
-      margin: 18px 0 0;
-      color: var(--color-text-secondary);
-      font-size: 1rem;
+    .personal-line {
+      max-width: 36ch;
+      margin: 24px 0 0;
+      color: var(--text-secondary);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.45;
     }
 
-    .app-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      width: min(100%, 920px);
-      gap: 24px;
-      margin-top: 44px;
+    .products {
+      border-top: 1px solid var(--outline);
     }
 
-    .product-card {
-      --card-accent: var(--color-interactive);
+    .product {
+      --accent: var(--brand);
+      display: block;
       position: relative;
-      min-width: 0;
-      min-height: 330px;
-      padding: clamp(24px, 4vw, 36px);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid var(--color-outline);
-      border-radius: 22px;
+      padding-block: clamp(38px, 6vw, 62px);
+      border-bottom: 1px solid var(--outline);
       color: inherit;
-      background:
-        linear-gradient(145deg, color-mix(in srgb, var(--card-accent) 8%, transparent), transparent 44%),
-        linear-gradient(180deg, var(--color-surface-raised), var(--color-surface));
-      box-shadow: var(--shadow-card);
       text-decoration: none;
-      isolation: isolate;
-      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
     }
 
-    .product-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--card-accent), transparent 72%);
+    .product--guitarmetro { --accent: var(--guitarmetro); }
+    .product--fingerboard { --accent: var(--fingerboard); }
+
+    .product-inner {
+      max-width: 790px;
+      transition: transform 180ms ease;
     }
 
-    .product-card::after {
-      content: "";
-      position: absolute;
-      right: -100px;
-      bottom: -120px;
-      z-index: -1;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: color-mix(in srgb, var(--card-accent) 9%, transparent);
-      filter: blur(8px);
+    .product:hover .product-inner,
+    .product:focus-visible .product-inner {
+      transform: translateX(6px);
     }
 
-    .product-card--guitarmetro { --card-accent: var(--color-guitarmetro); }
-    .product-card--fingerboard { --card-accent: var(--color-fingerboard); }
-
-    .product-card:hover {
-      transform: translateY(-4px);
-      border-color: color-mix(in srgb, var(--card-accent) 54%, var(--color-outline));
-      box-shadow: 0 30px 84px rgba(0, 0, 0, 0.42);
-    }
-
-    .product-card:focus-visible {
-      border-color: var(--card-accent);
-      outline-color: var(--color-focus);
-    }
-
-    .card-top {
+    .product-heading {
       display: flex;
-      align-items: flex-start;
-      gap: 18px;
+      align-items: center;
+      gap: 16px;
     }
 
     .app-icon {
-      width: 68px;
-      height: 68px;
-      flex: none;
-      border: 1px solid var(--color-outline);
-      border-radius: 17px;
+      width: 54px;
+      height: 54px;
+      flex: 0 0 auto;
+      display: block;
+      border: 1px solid var(--outline);
+      border-radius: 14px;
       object-fit: cover;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.36);
     }
 
-    .app-kind {
-      margin: 2px 0 8px;
-      color: var(--card-accent);
-      font-family: var(--font-label);
-      font-size: 0.75rem;
+    .product-kind {
+      margin: 0 0 5px;
+      color: var(--accent);
+      font-family: var(--label);
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
     h2 {
       margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(1.22rem, 2.2vw, 1.55rem);
+      font-family: var(--display);
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
       font-weight: 600;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
     }
 
-    .card-arrow {
-      margin-left: auto;
-      color: var(--color-text-tertiary);
-      font-size: 1.5rem;
-      line-height: 1;
-      transition: color 150ms ease, transform 150ms ease;
+    .product-summary {
+      margin: 24px 0 0;
+      color: var(--text);
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      font-weight: 600;
     }
 
-    .product-card:hover .card-arrow,
-    .product-card:focus-visible .card-arrow {
-      color: var(--card-accent);
-      transform: translate(2px, -2px);
-    }
-
-    .card-copy {
-      max-width: 42ch;
-      margin: 28px 0 0;
-      color: var(--color-text-secondary);
+    .product-description {
+      max-width: 66ch;
+      margin: 8px 0 0;
+      color: var(--text-secondary);
       font-size: 1rem;
     }
 
-    .card-footer { margin-top: auto; padding-top: 30px; }
-
     .platforms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .platform {
-      padding: 6px 10px;
-      border: 1px solid var(--color-outline);
-      border-radius: 999px;
-      color: var(--color-text-secondary);
-      background: rgba(255, 255, 255, 0.025);
-      font-family: var(--font-label);
-      font-size: 0.72rem;
-      letter-spacing: 0.03em;
+      margin: 16px 0 0;
+      color: var(--text-tertiary);
+      font-family: var(--label);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
     }
 
     .open-label {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       margin-top: 18px;
-      color: var(--card-accent);
-      font-family: var(--font-label);
-      font-size: 0.78rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
+      color: var(--accent);
       font-weight: 600;
-      letter-spacing: 0.04em;
+    }
+
+    .open-label span[aria-hidden="true"] {
+      transition: transform 150ms ease;
+    }
+
+    .product:hover .open-label span[aria-hidden="true"],
+    .product:focus-visible .open-label span[aria-hidden="true"] {
+      transform: translateX(4px);
     }
 
     footer {
-      border-top: 1px solid var(--color-outline);
-      color: var(--color-text-tertiary);
-      font-family: var(--font-label);
+      border-top: 1px solid var(--outline);
+      color: var(--text-tertiary);
+      font-family: var(--label);
       font-size: 0.75rem;
     }
 
@@ -362,39 +281,44 @@
     .footer-spacer { flex: 1; }
 
     footer a {
-      color: var(--color-text-secondary);
+      color: var(--text-secondary);
       text-underline-offset: 4px;
       text-decoration-color: transparent;
-      transition: color 150ms ease, text-decoration-color 150ms ease;
     }
 
     footer a:hover {
-      color: var(--color-text);
-      text-decoration-color: var(--color-text-tertiary);
+      color: var(--text);
+      text-decoration-color: var(--text-tertiary);
     }
 
     .zh-t { display: none; }
     html[lang="zh-CN"] .zh-t { display: inline; }
     html[lang="zh-CN"] .en-t { display: none; }
 
-    @media (max-width: 760px) {
-      .shell { width: min(100% - 36px, 640px); }
-      main { align-items: flex-start; padding-block: 58px 72px; }
-      .app-grid { grid-template-columns: 1fr; margin-top: 36px; }
-      .product-card { min-height: 300px; }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 36px, 620px); }
+      main { padding-block: 48px 64px; }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-bottom: 58px;
+      }
+      .hero-logo { width: min(210px, 58vw); }
+      .personal-line { margin-top: 18px; }
+      .product { padding-block: 42px; }
     }
 
     @media (max-width: 420px) {
       .shell { width: min(100% - 28px, 380px); }
-      .nav { min-height: 64px; gap: 12px; }
-      .hub-label { display: none; }
-      main { padding-block: 44px 56px; }
-      h1 { font-size: 1.85rem; }
-      .app-grid { gap: 16px; margin-top: 30px; }
-      .product-card { min-height: 286px; border-radius: 18px; }
-      .card-top { gap: 14px; }
-      .card-arrow { display: none; }
-      .app-icon { width: 60px; height: 60px; border-radius: 15px; }
+      .nav { min-height: 64px; }
+      main { padding-block: 38px 54px; }
+      .hero { padding-bottom: 46px; }
+      .hero-logo { width: min(180px, 58vw); border-radius: 22px; }
+      h1 { font-size: 2rem; }
+      .product-heading { gap: 13px; }
+      .app-icon { width: 48px; height: 48px; border-radius: 12px; }
+      h2 { font-size: 1.4rem; }
+      .product-summary { margin-top: 20px; }
       .footer-inner { align-items: flex-start; gap: 14px 20px; padding-block: 22px; }
       .footer-spacer { flex-basis: 100%; height: 0; }
     }
@@ -410,12 +334,11 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#products"><span class="en-t">Skip to products</span><span class="zh-t">跳到产品入口</span></a>
+  <a class="skip-link" href="#products"><span class="en-t">Skip to products</span><span class="zh-t">跳到产品</span></a>
 
   <header>
     <nav class="nav shell" aria-label="Primary navigation">
-      <a class="brand" href="/" aria-label="Elmer.H home"><img class="brand-logo" src="assets/logo.png" alt="" width="42" height="42">Elmer<span class="brand-dot">.</span>H</a>
-      <span class="hub-label"><span class="en-t">Product Hub</span><span class="zh-t">产品入口</span></span>
+      <a class="brand" href="/" aria-label="Elmer.H home">Elmer<span class="brand-dot">.</span>H</a>
       <span class="nav-spacer"></span>
       <button class="lang-button" id="languageButton" type="button" aria-pressed="false">
         <span class="en-t">中文</span><span class="zh-t">EN</span>
@@ -423,64 +346,61 @@
     </nav>
   </header>
 
-  <main id="products">
+  <main>
     <div class="shell">
-      <div class="intro">
-        <p class="eyebrow"><span class="en-t">// Choose a destination</span><span class="zh-t">// 选择一个入口</span></p>
-        <h1>
-          <span class="en-t">Apps and tools,<br>each in its own space.</span>
-          <span class="zh-t">选择一个产品，<br>进入它自己的空间。</span>
-        </h1>
-        <p class="intro-copy">
-          <span class="en-t">Two focused products, independently built and maintained.</span>
-          <span class="zh-t">两个专注的产品，各自独立开发与维护。</span>
-        </p>
-      </div>
+      <section class="hero" aria-labelledby="pageTitle">
+        <img class="hero-logo" src="assets/logo.png" alt="" width="549" height="549">
+        <div>
+          <h1 id="pageTitle">Elmer.H</h1>
+          <p class="personal-line">If a guitarist can’t build games, then a TA? Nah.</p>
+        </div>
+      </section>
 
-      <div class="app-grid">
-        <a class="product-card product-card--guitarmetro" href="/guitarmetro/">
-          <div class="card-top">
-            <img class="app-icon" src="assets/guitarmetro-icon.png" alt="" width="68" height="68">
-            <div>
-              <p class="app-kind">App</p>
-              <h2>GuitarMetro</h2>
+      <section class="products" id="products" aria-label="Products">
+        <a class="product product--guitarmetro" href="/guitarmetro/">
+          <div class="product-inner">
+            <div class="product-heading">
+              <img class="app-icon" src="assets/guitarmetro-icon.png" alt="" width="54" height="54">
+              <div>
+                <p class="product-kind">App</p>
+                <h2>GuitarMetro</h2>
+              </div>
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
-          </div>
-          <p class="card-copy">
-            <span class="en-t">A cross-platform practice metronome with progressive tempo training, reference tuning and practice statistics.</span>
-            <span class="zh-t">跨平台练习节拍器，集渐进变速训练、参考调弦与练琴统计于一体。</span>
-          </p>
-          <div class="card-footer">
-            <div class="platforms" aria-label="Supported platforms">
-              <span class="platform">Desktop</span>
-              <span class="platform">Mobile</span>
-            </div>
-            <span class="open-label"><span class="en-t">Open product page</span><span class="zh-t">打开产品页面</span> <span aria-hidden="true">→</span></span>
+            <p class="product-summary">
+              <span class="en-t">A metronome built for serious practice.</span>
+              <span class="zh-t">为认真练习而做的节拍器。</span>
+            </p>
+            <p class="product-description">
+              <span class="en-t">From steady timing to progressive tempo training, reference tuning and practice statistics, everything daily practice needs in one app.</span>
+              <span class="zh-t">从稳定节拍到渐进变速、参考调弦和练习统计，把日常练琴需要放在一个 App 里。</span>
+            </p>
+            <p class="platforms">Windows · macOS · iOS · Android</p>
+            <span class="open-label"><span class="en-t">View GuitarMetro</span><span class="zh-t">查看 GuitarMetro</span> <span aria-hidden="true">→</span></span>
           </div>
         </a>
 
-        <a class="product-card product-card--fingerboard" href="/fingerboard/">
-          <div class="card-top">
-            <img class="app-icon" src="assets/fingerboard-pro-icon.png" alt="" width="68" height="68">
-            <div>
-              <p class="app-kind">Web</p>
-              <h2>Fingerboard Pro</h2>
+        <a class="product product--fingerboard" href="/fingerboard/">
+          <div class="product-inner">
+            <div class="product-heading">
+              <img class="app-icon" src="assets/fingerboard-pro-icon.png" alt="" width="54" height="54">
+              <div>
+                <p class="product-kind">Web</p>
+                <h2>Fingerboard Pro</h2>
+              </div>
             </div>
-            <span class="card-arrow" aria-hidden="true">↗</span>
-          </div>
-          <p class="card-copy">
-            <span class="en-t">An interactive fretboard reference for visualizing scales, intervals, characteristic tones and chord relationships.</span>
-            <span class="zh-t">在整条吉他指板上查看音阶、音程、特征音与和弦关系的交互式参考工具。</span>
-          </p>
-          <div class="card-footer">
-            <div class="platforms" aria-label="Supported platforms">
-              <span class="platform">Browser</span>
-            </div>
-            <span class="open-label"><span class="en-t">Open web app</span><span class="zh-t">打开 Web 应用</span> <span aria-hidden="true">→</span></span>
+            <p class="product-summary">
+              <span class="en-t">See scales and chords across the entire fretboard.</span>
+              <span class="zh-t">在整条指板上看懂音阶与和弦。</span>
+            </p>
+            <p class="product-description">
+              <span class="en-t">Use an interactive guitar fretboard to explore notes, intervals, characteristic tones and chord relationships for study, analysis and improvisation.</span>
+              <span class="zh-t">用可交互的吉他指板查看音名、音程、特征音和和弦关系，帮助学习、分析与即兴。</span>
+            </p>
+            <p class="platforms">Browser</p>
+            <span class="open-label"><span class="en-t">Open Fingerboard Pro</span><span class="zh-t">打开 Fingerboard Pro</span> <span aria-hidden="true">→</span></span>
           </div>
         </a>
-      </div>
+      </section>
     </div>
   </main>
 
@@ -505,7 +425,7 @@
           language = savedLanguage === 'zh' ? 'zh-CN' : 'en';
         }
       } catch (_) {
-        // Continue with automatic language detection when storage is unavailable.
+        // Continue with the browser language when storage is unavailable.
       }
 
       function applyLanguage(nextLanguage) {
