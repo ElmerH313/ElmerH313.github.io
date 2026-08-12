@@ -138,8 +138,11 @@
 
     .hero-logo {
       width: 100%;
+      height: auto;
+      aspect-ratio: 1;
       display: block;
       border-radius: 28px;
+      object-fit: cover;
     }
 
     h1 {
@@ -160,17 +163,27 @@
     }
 
     .products {
-      border-top: 1px solid var(--outline);
+      display: grid;
+      gap: 20px;
     }
 
     .product {
       --accent: var(--brand);
       display: block;
       position: relative;
-      padding-block: clamp(38px, 6vw, 62px);
-      border-bottom: 1px solid var(--outline);
+      padding: clamp(30px, 5vw, 48px);
+      border: 1px solid var(--outline);
+      border-radius: 22px;
       color: inherit;
+      background: var(--surface);
       text-decoration: none;
+      transition: border-color 180ms ease, background-color 180ms ease;
+    }
+
+    .product:hover,
+    .product:focus-visible {
+      border-color: color-mix(in srgb, var(--accent) 48%, var(--outline));
+      background: color-mix(in srgb, var(--surface) 94%, var(--accent));
     }
 
     .product--guitarmetro { --accent: var(--guitarmetro); }
@@ -305,7 +318,7 @@
       }
       .hero-logo { width: min(210px, 58vw); }
       .personal-line { margin-top: 18px; }
-      .product { padding-block: 42px; }
+      .product { padding: 30px; }
     }
 
     @media (max-width: 420px) {
@@ -314,6 +327,8 @@
       main { padding-block: 38px 54px; }
       .hero { padding-bottom: 46px; }
       .hero-logo { width: min(180px, 58vw); border-radius: 22px; }
+      .products { gap: 14px; }
+      .product { padding: 24px; border-radius: 18px; }
       h1 { font-size: 2rem; }
       .product-heading { gap: 13px; }
       .app-icon { width: 48px; height: 48px; border-radius: 12px; }
