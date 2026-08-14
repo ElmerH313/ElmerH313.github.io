@@ -2,6 +2,8 @@
 
 > `https://elmerh.com` 的静态产品入口页。GitHub Pages 从 `main` 分支直接发布。
 
+当前主页验收版本：`1.0.0`。
+
 ## 仓库职责
 
 本仓库只负责统一入口体验，不包含任何产品源码、产品构建产物、完整营销页面、手册或下载发布逻辑。
@@ -19,7 +21,7 @@
 主页只展示：
 
 - Elmer.H 大型品牌 Logo、名称与一句个人描述。
-- GuitarMetro 和 Fingerboard Pro 两个纵向产品入口。
+- GuitarMetro 和 Fingerboard Web 两个纵向产品入口。
 - 无手动选择时按浏览器首选语言自动显示中文或英文；手动选择保存到 `localStorage('lang')` 并始终优先。
 - GitHub、Email、根隐私政策和版权信息。
 
@@ -51,7 +53,7 @@ assets/
   fonts.css / fonts/             自托管字体
   logo.png / logo-mark.png       品牌与社交分享图
   guitarmetro-icon.png           GuitarMetro 入口图标
-  fingerboard-pro-icon.png       Fingerboard Pro 入口图标
+  fingerboard-web-icon.png       Fingerboard Web 入口图标
 ```
 
 ## 本地预览与验证
