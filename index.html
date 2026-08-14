@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="application-version" content="1.0.0">
+  <meta name="application-version" content="1.0.1">
   <title>Elmer.H — Apps &amp; Web Tools</title>
   <meta name="description" content="Independent apps and web tools by Elmer.H: GuitarMetro and Fingerboard Web.">
   <meta name="theme-color" content="#090c12">
@@ -27,8 +27,8 @@
       --outline-strong: rgba(255, 255, 255, 0.25);
       --focus: #f6b8e2;
       --brand: #f266c6;
-      --guitarmetro: #f266c6;
-      --fingerboard: #68dea9;
+      --guitarmetro: #46dce5;
+      --fingerboard: #f4775d;
       --display: "Unbounded", "Segoe UI Variable", sans-serif;
       --body: "Space Grotesk", "Segoe UI Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
       --label: "JetBrains Mono", "Cascadia Code", monospace;
@@ -228,11 +228,16 @@
 
     h2 {
       margin: 0;
+      color: var(--text);
       font-family: var(--display);
       font-size: clamp(1.55rem, 3vw, 2.35rem);
       font-weight: 600;
       letter-spacing: -0.035em;
       line-height: 1.1;
+    }
+
+    .product-title-accent {
+      color: var(--accent);
     }
 
     .product-summary {
@@ -379,7 +384,7 @@
               <img class="app-icon" src="assets/guitarmetro-icon.png" alt="" width="54" height="54">
               <div>
                 <p class="product-kind">App</p>
-                <h2>GuitarMetro</h2>
+                <h2>Guitar<span class="product-title-accent">Metro</span></h2>
               </div>
             </div>
             <p class="product-summary">
@@ -401,7 +406,7 @@
               <img class="app-icon" src="assets/fingerboard-web-icon.png" alt="" width="54" height="54">
               <div>
                 <p class="product-kind">Web</p>
-                <h2>Fingerboard Web</h2>
+                <h2>Fingerboard <span class="product-title-accent">Web</span></h2>
               </div>
             </div>
             <p class="product-summary">
