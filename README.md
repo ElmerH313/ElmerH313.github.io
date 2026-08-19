@@ -2,7 +2,7 @@
 
 > `https://elmerh.com` 的静态产品入口页。GitHub Pages 从 `main` 分支直接发布。
 
-当前主页验收版本：`1.0.1`。
+当前主页验收版本：`1.1.0`。
 
 ## 仓库职责
 
@@ -13,6 +13,7 @@
 | `/` | `ElmerH313/ElmerH313.github.io` | 品牌首屏、纵向产品入口、语言切换和页脚 |
 | `/guitarmetro/` | `ElmerH313/guitarmetro` | 仅提供入口图标、摘要和链接 |
 | `/fingerboard/` | `ElmerH313/fingerboard` | 仅提供入口图标、摘要和链接 |
+| `myChordDiagram/#/lookup` | `ElmerH313/myChordDiagram` | 仅提供入口图标、摘要和外部链接 |
 
 每个产品仓库独立维护源码、测试、产品站、截图、手册、下载、产品隐私政策和 GitHub Pages 工作流。未来产品继续使用“一项产品一个仓库”，且仓库名必须与 `elmerh.com/<slug>/` 的 `slug` 一致。
 
@@ -21,7 +22,7 @@
 主页只展示：
 
 - Elmer.H 大型品牌 Logo、名称与一句个人描述。
-- GuitarMetro 和 Fingerboard Web 两个纵向产品入口。
+- GuitarMetro、Fingerboard Web 和 Chord Diagram 三个纵向产品入口。
 - 无手动选择时按浏览器首选语言自动显示中文或英文；手动选择保存到 `localStorage('lang')` 并始终优先。
 - GitHub、Email、根隐私政策和版权信息。
 
@@ -54,6 +55,7 @@ assets/
   logo.png / logo-mark.png       品牌与社交分享图
   guitarmetro-icon.png           GuitarMetro 入口图标
   fingerboard-web-icon.png       Fingerboard Web 入口图标
+  chord-diagram-icon.svg         Chord Diagram 入口图标
 ```
 
 ## 本地预览与验证
@@ -62,11 +64,12 @@ assets/
 python -m http.server 8642
 ```
 
-打开 `http://127.0.0.1:8642/`。独立产品仓库未挂载到同一本地服务器时，两个产品路径返回 404 属于预期；生产环境必须分别验证：
+打开 `http://127.0.0.1:8642/`。独立产品仓库未挂载到同一本地服务器时，产品路径返回 404 属于预期；生产环境必须分别验证：
 
 1. `https://elmerh.com/`
 2. `https://elmerh.com/guitarmetro/`
 3. `https://elmerh.com/fingerboard/`
-4. `https://elmerh.com/privacy.html`
+4. `https://elmerh313.github.io/myChordDiagram/#/lookup`
+5. `https://elmerh.com/privacy.html`
 
 主页修改还需检查中英文切换、360/768/1440px 布局、Tab 焦点顺序、减少动画模式，并确认源码中不存在 Supabase、留言板、二维码或产品截图引用。
