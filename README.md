@@ -2,7 +2,7 @@
 
 > `https://elmerh.com` 的静态产品入口页。GitHub Pages 从 `main` 分支直接发布。
 
-当前主页验收版本：`1.1.0`。
+当前主页验收版本：`1.1.1`。
 
 ## 仓库职责
 
@@ -13,7 +13,7 @@
 | `/` | `ElmerH313/ElmerH313.github.io` | 品牌首屏、纵向产品入口、语言切换和页脚 |
 | `/guitarmetro/` | `ElmerH313/guitarmetro` | 仅提供入口图标、摘要和链接 |
 | `/fingerboard/` | `ElmerH313/fingerboard` | 仅提供入口图标、摘要和链接 |
-| `myChordDiagram/#/lookup` | `ElmerH313/myChordDiagram` | 仅提供入口图标、摘要和外部链接 |
+| `/ChordDiagram/Lookup` | `ElmerH313/ChordDiagram` | 仅提供入口图标、摘要和链接 |
 
 每个产品仓库独立维护源码、测试、产品站、截图、手册、下载、产品隐私政策和 GitHub Pages 工作流。未来产品继续使用“一项产品一个仓库”，且仓库名必须与 `elmerh.com/<slug>/` 的 `slug` 一致。
 
@@ -69,7 +69,8 @@ python -m http.server 8642
 1. `https://elmerh.com/`
 2. `https://elmerh.com/guitarmetro/`
 3. `https://elmerh.com/fingerboard/`
-4. `https://elmerh313.github.io/myChordDiagram/#/lookup`
-5. `https://elmerh.com/privacy.html`
+4. `https://elmerh.com/ChordDiagram/Lookup`
+5. `https://elmerh.com/ChordDiagram/Identifier`
+6. `https://elmerh.com/privacy.html`
 
 主页修改还需检查中英文切换、360/768/1440px 布局、Tab 焦点顺序、减少动画模式，并确认源码中不存在 Supabase、留言板、二维码或产品截图引用。

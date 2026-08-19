@@ -1,5 +1,10 @@
 # Elmer.H 项目待办
 
+## Homepage 1.1.1：Chord Diagram 规范入口
+
+- [x] 将 Chord Diagram 入口更新为 `/ChordDiagram/Lookup`。
+- [x] 验证 `/ChordDiagram/Lookup`、`/ChordDiagram/Identifier` 与产品页返回主页按钮。
+
 ## 当前状态：海外站恢复，中国大陆接入继续暂停
 
 - [x] 停止腾讯云服务器上的 Nginx。
@@ -31,6 +36,6 @@
 
 ## 当前已部署到腾讯云但未对外开放
 
-- Homepage：海外 GitHub Pages 已发布 `1.1.0`；中国大陆服务器仍为 `1.0.1`，目录 `/var/www/elmerh.com`。
+- Homepage：海外 GitHub Pages 目标版本为 `1.1.1`；中国大陆服务器仍为 `1.0.1`，目录 `/var/www/elmerh.com`。
 - GuitarMetro：`1.0.8+9`，服务器路径 `/guitarmetro/`。
 - Fingerboard Web：`0.1.2`，服务器路径 `/fingerboard/`。
