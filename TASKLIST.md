@@ -4,9 +4,9 @@
 
 - [x] 停止腾讯云服务器上的 Nginx。
 - [x] 保持腾讯云防火墙 HTTP（80）规则关闭。
-- [ ] 将 GitHub Pages 从临时空分支 `codex/icp-review-offline` 切回 `main`。
-- [ ] 重新绑定 GitHub Pages 的 `elmerh.com` 自定义域名并恢复 HTTPS。
-- [ ] 验证 `/`、`www`、`/guitarmetro/`、`/fingerboard/` 和 Chord Diagram 均可访问。
+- [x] 将 GitHub Pages 从临时空分支 `codex/icp-review-offline` 切回 `main`。
+- [x] 重新绑定 GitHub Pages 的 `elmerh.com` 自定义域名并恢复 HTTPS。
+- [x] 验证 `/`、`www`、`/guitarmetro/`、`/fingerboard/` 和 Chord Diagram 均可访问。
 - [x] 删除本机预览隧道及临时 SSH 密钥。
 
 > 在 `elmerh.cn` 完成备案前，不得启动腾讯云 Nginx，也不得开放中国大陆服务器的 HTTP（80）与 HTTPS（443）端口。
@@ -31,6 +31,6 @@
 
 ## 当前已部署到腾讯云但未对外开放
 
-- Homepage：服务器当前仍为 `1.0.1`；海外 GitHub Pages 待发布 `1.1.0`，服务器目录 `/var/www/elmerh.com`。
+- Homepage：海外 GitHub Pages 已发布 `1.1.0`；中国大陆服务器仍为 `1.0.1`，目录 `/var/www/elmerh.com`。
 - GuitarMetro：`1.0.8+9`，服务器路径 `/guitarmetro/`。
 - Fingerboard Web：`0.1.2`，服务器路径 `/fingerboard/`。
